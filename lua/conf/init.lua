@@ -4,5 +4,7 @@ require('conf.treesitter-conf')
 require('conf.lualine-conf')
 require('conf.bufferline-conf')
 require('conf.gitsigns-conf')
+require('conf.autopairs-conf')
+require('conf.devicons-conf')
 
 

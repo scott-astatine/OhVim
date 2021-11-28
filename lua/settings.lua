@@ -3,6 +3,7 @@ vim.g.onedark_transparrent_background = true
 vim.g.onedark_style = 'warm'
 vim.g.onedark_italic_comment = true
 
+require'alpha'.setup(require'alpha.themes.dashboard'.opts)
 require('onedark').setup()
 require('kommentary.config').use_extended_mappings()
 require('conf')

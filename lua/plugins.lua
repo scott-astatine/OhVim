@@ -4,17 +4,27 @@ return require('packer').startup(
     -- Packer
     use { 'wbthomason/packer.nvim', opt = true }
 
+    -- Colorscheme
     use {'dracula/vim', as = 'dracula'}
     use 'navarasu/onedark.nvim'
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'norcalli/nvim-colorizer.lua'
+
+    -- Completion
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
     use 'nvim-lua/completion-nvim'
-    use 'euclidianAce/BetterLua.vim'
-    use 'tjdevries/manillua.nvim'
+    -- Kommentary & Autopairs
     use 'b3nj5m1n/kommentary'
+    use 'windwp/nvim-autopairs'
+
+    -- Code Runner
+    use { 'CRAG666/code_runner.nvim', branch = "new_features" }
+
+    -- TreeSitter
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'p00f/nvim-ts-rainbow'
     use 'nvim-treesitter/playground'
+    use 'andweeb/presence.nvim'
 
     -- Telescope
     use 'nvim-lua/popup.nvim'
@@ -23,40 +33,28 @@ return require('packer').startup(
     use 'nvim-telescope/telescope-media-files.nvim'
     use 'rcarriga/nvim-notify'
 
-    use 'onsails/lspkind-nvim'
-    use 'norcalli/nvim-colorizer.lua'
-
+    -- Git
     use 'lewis6991/gitsigns.nvim'
-
+    use 'TimUntersberger/neogit'
 
     -- StatusLine
     use 'nvim-lualine/lualine.nvim'
     use 'akinsho/bufferline.nvim'
 
     -- Startup buffer
-    use {
-      'goolord/alpha-nvim',
-      config = function ()
-          require'alpha'.setup(require'alpha.themes.startify'.opts)
-      end
-    }
+    use 'goolord/alpha-nvim'
 
-
-    -- Vim surround
-    use {
-      "blackCauldron7/surround.nvim",
-      config = function()
-        require"surround".setup {mappings_style = "sandwich"}
-      end
-    }
+    -- Icons
+    use 'kyazdani42/nvim-web-devicons'
 
     -- Nvim Tree
-    use {
-      'kyazdani42/nvim-tree.lua',
-      requires = 'kyazdani42/nvim-web-devicons',
-      config = function() require'nvim-tree'.setup {} end
-    }
-    -- Nvim lsp & autocompletion
+    use 'kyazdani42/nvim-tree.lua'
+
+    -- Nvim lsp & cmp
+    use 'onsails/lspkind-nvim'
+    use 'nanotee/nvim-lua-guide'
+    use 'euclidianAce/BetterLua.vim'
+    use 'tjdevries/manillua.nvim'
     use {
       'neovim/nvim-lspconfig',
       requires = {

@@ -15,6 +15,7 @@ keymap('n', '<Leader>x', ':', ops)
 
 -- Telescope
 keymap('n', '<Leader>ff', ':Telescope find_files<CR>', ops)
+keymap('n', '<Leader>gl', ':Telescope live_grep<CR>', ops)
 
 -- Window navigation
 keymap('n', '<C-h>', '<C-w>h', ops)
@@ -42,6 +43,8 @@ keymap('i', '<expr><TAB>', 'pumvisible() ? \"\\<C-n>\" : \\"<TAB>\"', ops)
 
 keymap('n', '<', '<gv', ops)
 keymap('n', '>', '>gv', ops)
+keymap('v', '<', '<gv', ops)
+keymap('v', '>', '>gv', ops)
 
 keymap('i', 'jk', '<ESC>', ops)
 keymap('i', 'kj', '<ESC>', ops)
