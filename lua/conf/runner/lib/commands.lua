@@ -1,8 +1,3 @@
--- Replace json variables with vim variables in command.
--- If a command has no arguments, one is added with the current file path
--- @param command command to run the path
--- @param path absolute path
--- @return command with variables replaced by modifiers
 local function re_jsonvar_with_vimvar(command, path)
   local no_sub_command = command
 
@@ -34,10 +29,6 @@ local function get_project_rootpath()
   return nil
 end
 
--- Return a command for filetype
--- @param filetype filetype of path
--- @param path absolute path to file
--- @return command
 local function get_command(filetype, path)
   path = path or vim.fn.expand("%:p")
   local command = vim.g.fileCommands[filetype]

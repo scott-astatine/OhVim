@@ -5,7 +5,7 @@ local bg = ''
 if vim.g.transparrent then
   bg = '#e0e11'
 else
-  bg = '#1c1e2c'
+  bg = '#1c1e1c'
 end
 
 local colors = {
@@ -34,6 +34,13 @@ local conditions = {
     local gitdir = vim.fn.finddir('.git', filepath .. ';')
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
+  not_nvtree = function ()
+    if vim.fn.bufname() ~= "NvimTree" then
+      return true
+    else
+      return false
+    end
+  end
 }
 
 -- Config
@@ -122,12 +129,15 @@ ins_left {
 ins_left {
   -- filesize component
   'filesize',
-  cond = conditions.buffer_not_empty,
+  icons_enabled = true,
+  color = {fg = "#9e3ca0"},
+  cond = conditions.buffer_not_empty and conditions.not_nvtree,
 }
 
 ins_left {
-  'filename',
-  cond = conditions.buffer_not_empty,
+   'filename',
+  cond = conditions.buffer_not_empty and conditions.not_nvtree,
+  icons_enabled = true,
   color = { fg = colors.magenta, gui = 'bold' },
 }
 
@@ -141,6 +151,7 @@ ins_left {
     color_warn = { fg = colors.yellow },
     color_info = { fg = colors.cyan },
   },
+  cond = conditions.buffer_not_empty,
 }
 ins_left {
   'o:encoding', -- option component same as &encoding in viml
@@ -149,31 +160,39 @@ ins_left {
   color = { fg = colors.green, gui = 'bold' },
 }
 
--- Insert mid section. You can make any number of sections in neovim :)
--- for lualine it's any number greater then 2
 ins_left {
   function()
     return '%='
   end,
 }
 
--- Add components to right sections
+-- Right section
+ins_right {
+  'location',
+  icons_enabled = true,
+  cond = conditions.not_nvtree,
+  color = { fg = colors.orange }
+}
 
 ins_right {
   'fileformat',
   fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+  icons_enabled = true,
   color = { fg = colors.green, gui = 'bold' },
+  cond = conditions.not_nvtree,
 }
 
-ins_right { 'location' }
-
-ins_right { 'progress', color = { fg = colors.violet, gui = 'bold' } }
+ins_right {
+  'progress',
+  cond = conditions.not_nvtree,
+  color = { fg = colors.violet, gui = 'bold' }
+}
 
 ins_right {
   'branch',
   icon = '',
   color = { fg = colors.green, gui = 'bold' },
+  cond = conditions.not_nvtree,
 }
 
 ins_right {
@@ -194,8 +213,9 @@ ins_right {
     return '▊'
   end,
   color = 'LualineMode',
+  cond = conditions.not_nvtree,
   padding = { left = 1 },
 }
 
--- Now don't forget to initialize lualine
 lualine.setup(config)
+

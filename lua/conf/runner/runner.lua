@@ -1,6 +1,6 @@
-local commands = require("code_runner.commands")
+local commands = require("conf.runner.lib.commands")
 local M = {}
-local o = require("code_runner.options")
+local o = require("conf.runner.lib.options")
 
 
 M.setup = function(user_options)
@@ -16,13 +16,13 @@ M.setup = function(user_options)
       return cmd_keys
     endfunction
 
-    command! CRFiletype lua require('code_runner').open_filetype_suported()
-    command! CRProjects lua require('code_runner').open_project_manager()
-    command! CRFiletype lua require('code_runner').open_filetype_suported()
-    command! CRProjects lua require('code_runner').open_project_manager()
-    command! -nargs=? -complete=custom,CRunnerGetKeysForCmds RunCode lua require('code_runner').run_code("<args>")
-    command! RunFile lua require('code_runner').run_filetype()
-    command! RunProject lua require('code_runner').run_project()
+    command! CRFiletype lua require('conf.runner.runner').open_filetype_suported()
+    command! CRProjects lua require('conf.runner.runner').open_project_manager()
+    command! CRFiletype lua require('conf.runner.runner').open_filetype_suported()
+    command! CRProjects lua require('conf.runner.runner').open_project_manager()
+    command! -nargs=? -complete=custom,CRunnerGetKeysForCmds RunCode lua require('conf.runner.runner').run_code("<args>")
+    command! RunFile lua require('conf.runner.runner').run_filetype()
+    command! RunProject lua require('conf.runner.runner').run_project()
     ]],
     false
   )
@@ -43,7 +43,7 @@ end
 
 M.load_json_files = function()
   -- Load json config and convert to table
-  local load_json_as_table = require("code_runner.load_json")
+  local load_json_as_table = require("conf.runner.lib.load_json")
   local opt = o.get()
   vim.g.fileCommands = load_json_as_table(opt.filetype_path) or get_conf_runners(opt.filetype)
   vim.g.projectManager = load_json_as_table(o.get().project_path) or get_conf_runners(opt.projects)
@@ -69,4 +69,4 @@ M.open_project_manager = function()
   open_json(o.get().project_path)
 end
 
-return M
+return M.setup{}

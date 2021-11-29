@@ -1,11 +1,11 @@
 -- Colorscheme config
 vim.g.onedark_transparrent_background = true
-vim.g.onedark_style = 'warm'
+vim.g.onedark_style = 'warmer'
 vim.g.onedark_italic_comment = true
 
+require('neoscroll').setup()
 require'alpha'.setup(require'alpha.themes.dashboard'.opts)
 require('onedark').setup()
-require('kommentary.config').use_extended_mappings()
 require('conf')
 
 -- Vim settings
@@ -51,4 +51,6 @@ if vim.g.transparrent then
   vim.api.nvim_command('highlight NonText guibg=NONE ctermbg=NONE')
   vim.api.nvim_command('highlight EndOfBuffer guibg=NONE ctermbg=NONE')
 end
+
+
 

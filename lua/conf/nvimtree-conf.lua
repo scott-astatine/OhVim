@@ -12,15 +12,15 @@ vim.g.nvim_tree_window_picker_exclude = {
        }
      }
 
-
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local mapL = {
   { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
-  { key = "l",                        cb = tree_cb("edit") },
+  { key = "l",                            cb = tree_cb("edit") },
   { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
-  { key = "m",    cb = tree_cb("cd") },
-  { key = "v",                        cb = tree_cb("vsplit") },
-  { key = "g",                        cb = tree_cb("split") },
+  { key = "<Leader>r",                    cb = tree_cb("refresh") },
+  { key = "m",    			  cb = tree_cb("cd") },
+  { key = "v",                        	  cb = tree_cb("vsplit") },
+  { key = "g",                        	  cb = tree_cb("split") },
   { key = "<C-t>",                        cb = tree_cb("tabnew") },
   { key = "<",                            cb = tree_cb("prev_sibling") },
   { key = ">",                            cb = tree_cb("next_sibling") },
@@ -61,7 +61,7 @@ require'nvim-tree'.setup {
   hijack_cursor       = false,
   update_cwd          = false,
   update_to_buf_dir   = {
-    enable = false,
+    enable = true,
     auto_open = true,
   },
   diagnostics = {
@@ -92,7 +92,7 @@ require'nvim-tree'.setup {
     timeout = 1000,
   },
   view = {
-    width = 30,
+    width = 33,
     height = 30,
     hide_root_folder = false,
     side = 'left',

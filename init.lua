@@ -1,6 +1,6 @@
 require('plugins')
 require('keymaps')
-require('settings')
+require('config')
 require('completion')
 require('lsp.lua-ls')
 

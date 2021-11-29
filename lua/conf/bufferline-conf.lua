@@ -30,7 +30,14 @@ require('bufferline').setup {
         return true
       end
     end,
-    offsets = {{filetype = "NvimTree", text = "Project",text_align = "center" }},
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "🛠₱roject⚙️",
+        text_align = "center",
+        color = {fg = "#ff385c"}
+      }
+    },
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = true,
     show_close_icon = true,

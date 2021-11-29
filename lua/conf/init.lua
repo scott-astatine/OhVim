@@ -6,5 +6,7 @@ require('conf.bufferline-conf')
 require('conf.gitsigns-conf')
 require('conf.autopairs-conf')
 require('conf.devicons-conf')
+require('conf.whichkey-conf')
+require('conf.comment-conf')
 
 

@@ -1,52 +1,43 @@
 local keymap = vim.api.nvim_set_keymap
-local ops = { noremap = true, silent = true }
-
-
-keymap('n', 'Space', '<NOP>', ops)
-
 vim.g.mapleader = ' '
 
-keymap('n', '<Leader>h', ':set hlsearch!<CR>', ops)
-keymap('n', '<Leader>s', ':w<CR>', ops)
-keymap('n', '<Leader>q', ':q<CR>', ops)
-keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', ops)
-keymap('n', '<Leader>e', ':NvimTreeFocus<CR>', ops)
-keymap('n', '<Leader>x', ':', ops)
+local ops = {noremap = true, silent = true}
 
--- Telescope
-keymap('n', '<Leader>ff', ':Telescope find_files<CR>', ops)
-keymap('n', '<Leader>gl', ':Telescope live_grep<CR>', ops)
-
--- Window navigation
+--- Window Navigation
+keymap('n', '<C-l>', '<C-w>l', ops)
 keymap('n', '<C-h>', '<C-w>h', ops)
 keymap('n', '<C-j>', '<C-w>j', ops)
 keymap('n', '<C-k>', '<C-w>k', ops)
-keymap('n', '<C-l>', '<C-w>l', ops)
 
--- Kommentry
-vim.api.nvim_set_keymap("n", "<leader>cl", "<Plug>kommentary_line_increase", {})
-vim.api.nvim_set_keymap("n", "<leader>ci", "<Plug>kommentary_motion_increase", {})
-vim.api.nvim_set_keymap("x", "<leader>cl", "<Plug>kommentary_visual_increase", {})
-vim.api.nvim_set_keymap("n", "<leader>cdc", "<Plug>kommentary_line_decrease", {})
-vim.api.nvim_set_keymap("n", "<leader>cd", "<Plug>kommentary_motion_decrease", {})
-vim.api.nvim_set_keymap("x", "<leader>cd", "<Plug>kommentary_visual_decrease", {})
+keymap('n', 'L', ':bn!<CR>', ops)
+keymap('n', 'H', ':bp!<CR>', ops)
+keymap('n', '<Leader>x', ':', ops)
 
--- Buffer nav
-keymap('n', 'L', ':bnext<CR>', ops)
-keymap('n', 'H', ':bprevious<CR>', ops)
-keymap('n', '<Leader>bp', ':bprevious<CR>', ops)
-keymap('n', '<Leader>bn', ':bnext<CR>', ops)
-keymap('n', '<Leader>bl', ':Telescope buffers<CR>', ops)
-keymap('n', '<Leader>bc', ':bdelete<CR>', ops)
-
+-- Completion
 keymap('i', '<expr><TAB>', 'pumvisible() ? \"\\<C-n>\" : \\"<TAB>\"', ops)
 
+-- Tab indent
 keymap('n', '<', '<gv', ops)
 keymap('n', '>', '>gv', ops)
 keymap('v', '<', '<gv', ops)
 keymap('v', '>', '>gv', ops)
+keymap('x', '<', '<gv', ops)
+keymap('x', '>', '>gv', ops)
 
 keymap('i', 'jk', '<ESC>', ops)
 keymap('i', 'kj', '<ESC>', ops)
 keymap('i', 'jj', '<ESC>', ops)
+
+local t = {}
+t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
+t['<C-d>'] = {'scroll', {'vim.wo.scroll', 'true', '250'}}
+t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '450'}}
+t['<C-f>'] = {'scroll', {'vim.api.nvim_win_get_height(0)', 'true', '450'}}
+t['<C-y>'] = {'scroll', {'-0.10', 'false', '100'}}
+t['<C-e>'] = {'scroll', {'0.10', 'false', '100'}}
+t['zt'] = {'zt', {'250'}}
+t['zz'] = {'zz', {'250'}}
+t['zb'] = {'zb', {'250'}}
+
+require('neoscroll.config').set_mappings(t)
 

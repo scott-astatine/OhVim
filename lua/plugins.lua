@@ -3,6 +3,10 @@ return require('packer').startup(
   function(use)
     -- Packer
     use { 'wbthomason/packer.nvim', opt = true }
+    use 'karb94/neoscroll.nvim'
+
+    -- WhichKey
+    use 'folke/which-key.nvim'
 
     -- Colorscheme
     use {'dracula/vim', as = 'dracula'}
@@ -14,11 +18,9 @@ return require('packer').startup(
     use 'hrsh7th/vim-vsnip'
     use 'nvim-lua/completion-nvim'
     -- Kommentary & Autopairs
-    use 'b3nj5m1n/kommentary'
+    use 'numToStr/Comment.nvim'
     use 'windwp/nvim-autopairs'
 
-    -- Code Runner
-    use { 'CRAG666/code_runner.nvim', branch = "new_features" }
 
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -32,6 +34,7 @@ return require('packer').startup(
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-media-files.nvim'
     use 'rcarriga/nvim-notify'
+    use 'nvim-telescope/telescope-frecency.nvim'
 
     -- Git
     use 'lewis6991/gitsigns.nvim'
@@ -46,12 +49,13 @@ return require('packer').startup(
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
-
+    -- use 'yamatsum/nvim-nonicons'
     -- Nvim Tree
     use 'kyazdani42/nvim-tree.lua'
 
     -- Nvim lsp & cmp
     use 'onsails/lspkind-nvim'
+    use 'williamboman/nvim-lsp-installer'
     use 'nanotee/nvim-lua-guide'
     use 'euclidianAce/BetterLua.vim'
     use 'tjdevries/manillua.nvim'
