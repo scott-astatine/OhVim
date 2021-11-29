@@ -35,7 +35,12 @@ local conditions = {
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
   not_nvtree = function ()
-    if vim.fn.bufname() ~= "NvimTree" then
+    local bufname = vim.fn.bufname
+    if bufname() ~= "NvimTree" then
+      return true
+    elseif "packer" ~= bufname()then
+      return true
+    elseif bufname() == "" then
       return true
     else
       return false

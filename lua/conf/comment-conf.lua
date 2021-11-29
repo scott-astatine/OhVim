@@ -39,14 +39,6 @@ require('Comment').setup({
       ---block-comment opfunc mapping
       block = "gb",
     },
-
-    ---Pre-hook, called before commenting the line
-    ---@type function|nil
-    pre_hook = pre_hook,
-
-    ---Post-hook, called after commenting is done
-    ---@type function|nil
-    post_hook = nil,
 })
 
 

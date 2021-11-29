@@ -13,6 +13,8 @@ return require('packer').startup(
     use 'navarasu/onedark.nvim'
     use 'norcalli/nvim-colorizer.lua'
 
+    use 'moll/vim-bbye'
+
     -- Completion
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
@@ -21,6 +23,7 @@ return require('packer').startup(
     use 'numToStr/Comment.nvim'
     use 'windwp/nvim-autopairs'
 
+    use 'MunifTanjim/nui.nvim'
 
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -34,7 +37,13 @@ return require('packer').startup(
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-media-files.nvim'
     use 'rcarriga/nvim-notify'
-    use 'nvim-telescope/telescope-frecency.nvim'
+    use {
+      "nvim-telescope/telescope-frecency.nvim",
+      config = function()
+        require"telescope".load_extension("frecency")
+      end,
+      requires = {"tami5/sqlite.lua"}
+    }
 
     -- Git
     use 'lewis6991/gitsigns.nvim'

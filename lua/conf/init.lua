@@ -8,5 +8,6 @@ require('conf.autopairs-conf')
 require('conf.devicons-conf')
 require('conf.whichkey-conf')
 require('conf.comment-conf')
+require('conf.telescope-conf')
 
 

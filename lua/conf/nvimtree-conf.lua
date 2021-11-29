@@ -4,6 +4,8 @@ vim.g.nvim_tree_special_files = { ['README.md'] = 1, ['Makefile'] = 1, ['MAKEFIL
 vim.g.nvim_tree_window_picker_exclude = {
        ['filetype'] = {
          'notify',
+         '.git',
+         'node_modules',
          'packer',
          'qf'
        },
@@ -16,12 +18,11 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local mapL = {
   { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
   { key = "l",                            cb = tree_cb("edit") },
-  { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
   { key = "<Leader>r",                    cb = tree_cb("refresh") },
   { key = "m",    			  cb = tree_cb("cd") },
   { key = "v",                        	  cb = tree_cb("vsplit") },
-  { key = "g",                        	  cb = tree_cb("split") },
-  { key = "<C-t>",                        cb = tree_cb("tabnew") },
+  { key = "h",                        	  cb = tree_cb("split") },
+  { key = "t",                        cb = tree_cb("tabnew") },
   { key = "<",                            cb = tree_cb("prev_sibling") },
   { key = ">",                            cb = tree_cb("next_sibling") },
   { key = "P",                            cb = tree_cb("parent_node") },
@@ -103,6 +104,5 @@ require'nvim-tree'.setup {
     }
   }
 }
-
 
 
