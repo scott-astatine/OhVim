@@ -9,12 +9,16 @@ keymap('n', '<C-h>', '<C-w>h', ops)
 keymap('n', '<C-j>', '<C-w>j', ops)
 keymap('n', '<C-k>', '<C-w>k', ops)
 
+-- Buffer Navigation
 keymap('n', 'L', ':bn!<CR>', ops)
 keymap('n', 'H', ':bp!<CR>', ops)
 keymap('n', '<Leader>x', ':', ops)
 
--- Completion
+-- Completion & Lsp
 keymap('i', '<expr><TAB>', 'pumvisible() ? \"\\<C-n>\" : \\"<TAB>\"', ops)
+keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', ops)
+keymap('n', 'R', ':lua vim.lsp.buf.rename()<CR>', ops)
+
 
 -- Tab indent
 keymap('n', '<', '<gv', ops)
@@ -24,10 +28,12 @@ keymap('v', '>', '>gv', ops)
 keymap('x', '<', '<gv', ops)
 keymap('x', '>', '>gv', ops)
 
+-- Escapes
 keymap('i', 'jk', '<ESC>', ops)
 keymap('i', 'kj', '<ESC>', ops)
 keymap('i', 'jj', '<ESC>', ops)
 
+-- Smooth Scorlling
 local t = {}
 t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
 t['<C-d>'] = {'scroll', {'vim.wo.scroll', 'true', '250'}}

@@ -1,4 +1,15 @@
 
+require('packer').init {
+  log = { level = "warn" },
+  git = { clone_timeout = 500 },
+  display = {
+    open_fn = function()
+      return require("packer.util").float { border = "rounded" }
+    end,
+  },
+}
+
+
 return require('packer').startup(
   function(use)
     -- Packer
@@ -25,11 +36,22 @@ return require('packer').startup(
 
     use 'MunifTanjim/nui.nvim'
 
+    -- Project manager
+    use 'ahmedkhalf/project.nvim'
+
     -- TreeSitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'p00f/nvim-ts-rainbow'
     use 'nvim-treesitter/playground'
     use 'andweeb/presence.nvim'
+
+    -- Todo comment
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+      end
+    }
 
     -- Telescope
     use 'nvim-lua/popup.nvim'
@@ -54,7 +76,7 @@ return require('packer').startup(
     use 'akinsho/bufferline.nvim'
 
     -- Startup buffer
-    use 'goolord/alpha-nvim'
+    use 'Shatur/neovim-session-manager'
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
@@ -78,7 +100,6 @@ return require('packer').startup(
         'hrsh7th/nvim-cmp'
       }
     }
-
 
 end)
 

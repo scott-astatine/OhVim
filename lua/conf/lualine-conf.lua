@@ -1,6 +1,5 @@
 local lualine = require 'lualine'
 
--- Color table for highlights
 local bg = ''
 if vim.g.transparrent then
   bg = '#e0e11'
@@ -35,12 +34,7 @@ local conditions = {
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
   not_nvtree = function ()
-    local bufname = vim.fn.bufname
-    if bufname() ~= "NvimTree" then
-      return true
-    elseif "packer" ~= bufname()then
-      return true
-    elseif bufname() == "" then
+    if vim.fn.bufname() ~= "NvimTree" then
       return true
     else
       return false
@@ -53,10 +47,7 @@ local config = {
   options = {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
-    theme = {
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
-    },
+    theme = 'onedark',
   },
   sections = {
     -- these are to remove the defaults
@@ -119,6 +110,7 @@ ins_left {
   end,
   color = 'LualineMode',
   padding = { left = 0, right = 1 }, -- We don't need space before this
+  cond = conditions.buffer_not_empty
 }
 
 ins_left {
@@ -129,6 +121,7 @@ ins_left {
   end,
   color = 'LualineMode',
   padding = { right = 1 },
+  cond = conditions.buffer_not_empty
 }
 
 ins_left {
@@ -161,7 +154,7 @@ ins_left {
 ins_left {
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)
-  cond = conditions.hide_in_width,
+  cond = conditions.hide_in_width and conditions.buffer_not_empty and conditions.not_nvtree,
   color = { fg = colors.green, gui = 'bold' },
 }
 

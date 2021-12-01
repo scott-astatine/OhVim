@@ -1,10 +1,10 @@
 vim.o.completeopt = "menuone,noselect"
 
+local lspkind = require('lspkind')
 local cmp = require'cmp'
 
   cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -33,7 +33,12 @@ local cmp = require'cmp'
       -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
-    })
+    }),
+    formatting = {
+        format = lspkind.cmp_format(),
+    }
+
+
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

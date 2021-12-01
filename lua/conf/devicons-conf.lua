@@ -6,10 +6,14 @@ devicons.setup {
 
 devicons.set_icon({
    nim = {
-    icon = "⚡",
+    icon = "🌩 ",
     color = "#ef9c25",
     name = "Nim"
+  },
+  nimble = {
+    icon = "⚡",
+    color = "#ef9c25",
+    name = "Nimble"
   }
-
 })
 

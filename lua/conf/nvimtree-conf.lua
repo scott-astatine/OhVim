@@ -1,6 +1,5 @@
 
 vim.g.nvim_tree_refresh_wait = 5000
-vim.g.nvim_tree_special_files = { ['README.md'] = 1, ['Makefile'] = 1, ['MAKEFILE'] = 1 }
 vim.g.nvim_tree_window_picker_exclude = {
        ['filetype'] = {
          'notify',
@@ -22,7 +21,7 @@ local mapL = {
   { key = "m",    			  cb = tree_cb("cd") },
   { key = "v",                        	  cb = tree_cb("vsplit") },
   { key = "h",                        	  cb = tree_cb("split") },
-  { key = "t",                        cb = tree_cb("tabnew") },
+  { key = "t",                            cb = tree_cb("tabnew") },
   { key = "<",                            cb = tree_cb("prev_sibling") },
   { key = ">",                            cb = tree_cb("next_sibling") },
   { key = "P",                            cb = tree_cb("parent_node") },
@@ -47,7 +46,6 @@ local mapL = {
   { key = "[c",                           cb = tree_cb("prev_git_item") },
   { key = "]c",                           cb = tree_cb("next_git_item") },
   { key = "-",                            cb = tree_cb("dir_up") },
-  { key = "s",                            cb = tree_cb("system_open") },
   { key = "q",                            cb = tree_cb("close") },
   { key = "g?",                           cb = tree_cb("toggle_help") },
 }
@@ -96,10 +94,10 @@ require'nvim-tree'.setup {
     width = 33,
     height = 30,
     hide_root_folder = false,
-    side = 'left',
+    side = 'right',
     auto_resize = false,
     mappings = {
-      custom_only = false,
+      custom_only = true,
       list = mapL
     }
   }

@@ -1,12 +1,23 @@
 -- Colorscheme config
 vim.g.onedark_transparrent_background = true
-vim.g.onedark_style = 'darker'
+vim.g.onedark_style = 'warmer'
 vim.g.onedark_italic_comment = true
 
+
 require('neoscroll').setup()
-require'alpha'.setup(require'alpha.themes.dashboard'.opts)
 require('onedark').setup()
 require('conf')
+require("todo-comments").setup()
+-- Session manager
+local Path = require('plenary.path')
+require('session_manager').setup({
+  sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'),
+  path_replacer = '__', -- The character to which the path separator will be replaced for session files.
+  colon_replacer = '++', -- The character to which the colon symbol will be replaced for session files.
+  autoload_mode = "Disabled", -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+  autosave_last_session = false, -- Automatically save last session on exit.
+  autosave_ignore_not_normal = true, -- Plugin will not save a session when no writable and listed buffers are opened.
+})
 
 -- Vim settings
 vim.o.number = true
@@ -14,7 +25,6 @@ vim.o.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.guifont = 'JetBrains Mono:h9'
 vim.o.wrap = false
-vim.o.cmdheight = 1
 vim.o.smarttab = true
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -30,7 +40,7 @@ vim.o.incsearch = true
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.expandtab = true
-vim.g.transparrent = false
+vim.g.transparrent = true
 vim.o.showmode = false
 vim.highlight.on_yank { on_visual = true }
 
@@ -51,6 +61,8 @@ if vim.g.transparrent then
   vim.api.nvim_command('highlight NonText guibg=NONE ctermbg=NONE')
   vim.api.nvim_command('highlight EndOfBuffer guibg=NONE ctermbg=NONE')
 end
+
+-- vim.cmd("autocmd SaveSession")
 
 --- Bdelete to close buffer without exiting nvim
 vim.cmd(

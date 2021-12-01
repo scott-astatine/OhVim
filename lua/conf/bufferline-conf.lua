@@ -1,7 +1,9 @@
 require('bufferline').setup {
   options = {
-    numbers = "both",
-    close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+    numbers = "ordinal",
+    buffer_close_icon = '',
+    close_icon = '',
+    close_command = "Bdelete %d",       -- can be a string | function, see "Mouse actions"
     right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
     middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
@@ -15,7 +17,7 @@ require('bufferline').setup {
       end
     end,
     max_name_length = 18,
-    max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+    max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
     tab_size = 18,
     diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
@@ -33,9 +35,9 @@ require('bufferline').setup {
     offsets = {
       {
         filetype = "NvimTree",
-        text = "🛠₱roject⚙️",
+        text = "🛠 ₱roject ⚙️",
         text_align = "center",
-        color = {fg = "#ff385c"}
+        color = "#ff385c"
       }
     },
     show_buffer_icons = true, -- disable filetype icons for buffers
