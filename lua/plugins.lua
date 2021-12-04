@@ -27,8 +27,7 @@ return require('packer').startup(
     use 'moll/vim-bbye'
 
     -- Completion
-    use 'hrsh7th/cmp-vsnip'
-    use 'hrsh7th/vim-vsnip'
+    use 'L3MON4D3/LuaSnip'
     use 'nvim-lua/completion-nvim'
     -- Kommentary & Autopairs
     use 'numToStr/Comment.nvim'
@@ -39,7 +38,13 @@ return require('packer').startup(
     -- Project manager
     use 'ahmedkhalf/project.nvim'
 
-    -- TreeSitter
+    -- Neorg
+    use {
+      "nvim-neorg/neorg",
+      requires = "nvim-lua/plenary.nvim"
+    }
+
+    -- treesitter
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'p00f/nvim-ts-rainbow'
     use 'nvim-treesitter/playground'
@@ -49,8 +54,12 @@ return require('packer').startup(
     use {
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
-      config = function()
-      end
+    }
+    use {
+      'VonHeikemen/searchbox.nvim',
+      requires = {
+        {'MunifTanjim/nui.nvim'}
+      }
     }
 
     -- Telescope
@@ -80,7 +89,6 @@ return require('packer').startup(
 
     -- Icons
     use 'kyazdani42/nvim-web-devicons'
-    -- use 'yamatsum/nvim-nonicons'
     -- Nvim Tree
     use 'kyazdani42/nvim-tree.lua'
 

@@ -3,11 +3,11 @@ vim.g.onedark_transparrent_background = true
 vim.g.onedark_style = 'warmer'
 vim.g.onedark_italic_comment = true
 
-
 require('neoscroll').setup()
 require('onedark').setup()
 require('conf')
 require("todo-comments").setup()
+
 -- Session manager
 local Path = require('plenary.path')
 require('session_manager').setup({
@@ -35,12 +35,22 @@ vim.o.cursorline = true
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.showtabline = 2
-vim.g.clipboard = 'unamedplus'
+vim.g.clipboard = {
+  name = 'CopyQ',
+  copy = {
+    ['+'] = { 'copyq', 'add', '-' },
+    ['*'] = { 'copyq', 'add', '-' }
+  },
+  paste = {
+    ['+'] = { 'copyq', 'paste', '-' },
+    ['*'] = { 'copyq', 'paste', '-' }
+  }
+}
 vim.o.incsearch = true
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.expandtab = true
-vim.g.transparrent = true
+vim.g.transparrent = false
 vim.o.showmode = false
 vim.highlight.on_yank { on_visual = true }
 
@@ -55,6 +65,47 @@ vim.g.neovide_opacity = 0.8
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_density = 7.0
 vim.g.neovide_floating_blur = 1
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+
+local signs = {
+  Error = " ",
+  Warn = " ",
+  Hint = " ",
+  Info = " "
+}
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+function PrintDiagnostics(opts, bufnr, line_nr, client_id)
+  opts = opts or {}
+
+  bufnr = bufnr or 0
+  line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
+
+  local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
+  if vim.tbl_isempty(line_diagnostics) then return end
+
+  local diagnostic_message = ""
+  for i, diagnostic in ipairs(line_diagnostics) do
+    diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
+    print(diagnostic_message)
+    if i ~= #line_diagnostics then
+      diagnostic_message = diagnostic_message .. "\n"
+    end
+  end
+  vim.api.nvim_echo({{diagnostic_message, "Normal"}}, false, {})
+end
+
+vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
 
 if vim.g.transparrent then
   vim.api.nvim_command('highlight Normal guibg=NONE ctermbg=NONE')
@@ -62,7 +113,6 @@ if vim.g.transparrent then
   vim.api.nvim_command('highlight EndOfBuffer guibg=NONE ctermbg=NONE')
 end
 
--- vim.cmd("autocmd SaveSession")
 
 --- Bdelete to close buffer without exiting nvim
 vim.cmd(

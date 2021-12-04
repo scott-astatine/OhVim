@@ -6,7 +6,7 @@ require('bufferline').setup {
     close_command = "Bdelete %d",       -- can be a string | function, see "Mouse actions"
     right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
+    middle_mouse_command = "Bdelete! %d",          -- can be a string | function, see "Mouse actions"
     indicator_icon = '┃',
     modified_icon = '●',
     left_trunc_marker = '',
@@ -21,6 +21,10 @@ require('bufferline').setup {
     tab_size = 18,
     diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
+    diagnostics_indicator = function(count, _, _, _)
+      -- local icon = level:match("error") and " " or " "
+      return " " .. count
+    end,
     custom_filter = function(buf_number)
       if vim.bo[buf_number].filetype ~= "ex" then
         return true
@@ -35,19 +39,18 @@ require('bufferline').setup {
     offsets = {
       {
         filetype = "NvimTree",
-        text = "🛠 ₱roject ⚙️",
+        text = "🛠 Ⲣ𝖗𝖔𝖏𝖊𝖈𝖙 ⚙️",
         text_align = "center",
-        color = "#ff385c"
       }
     },
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = true,
-    show_close_icon = true,
+    show_close_icon = false,
     show_tab_indicators = true,
     persist_buffer_sort = true,
-    separator_style = "slant",
+    separator_style = "thick",
     enforce_regular_tabs = true,
-    always_show_bufferline = true,
+    always_show_bufferline = false,
     sort_by = 'id'
   }
 }

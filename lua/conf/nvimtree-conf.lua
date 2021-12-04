@@ -1,4 +1,4 @@
-
+-- NvimTree Config
 vim.g.nvim_tree_refresh_wait = 5000
 vim.g.nvim_tree_window_picker_exclude = {
        ['filetype'] = {
@@ -56,15 +56,15 @@ require'nvim-tree'.setup {
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
   auto_close          = true,
-  open_on_tab         = false,
+  open_on_tab         = true,
   hijack_cursor       = false,
-  update_cwd          = false,
+  update_cwd          = true,
   update_to_buf_dir   = {
     enable = true,
     auto_open = true,
   },
   diagnostics = {
-    enable = false,
+    enable = true,
     icons = {
       hint = "",
       info = "",
@@ -78,11 +78,11 @@ require'nvim-tree'.setup {
     ignore_list = {}
   },
   system_open = {
-    cmd  = nil,
+    cmd  = true,
     args = {}
   },
   filters = {
-    dotfiles = false,
+    dotfiles = true,
     custom = {}
   },
   git = {
@@ -91,7 +91,7 @@ require'nvim-tree'.setup {
     timeout = 1000,
   },
   view = {
-    width = 33,
+    width = 35,
     height = 30,
     hide_root_folder = false,
     side = 'right',
@@ -102,5 +102,4 @@ require'nvim-tree'.setup {
     }
   }
 }
-
 

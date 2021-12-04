@@ -9,6 +9,10 @@ keymap('n', '<C-h>', '<C-w>h', ops)
 keymap('n', '<C-j>', '<C-w>j', ops)
 keymap('n', '<C-k>', '<C-w>k', ops)
 
+-- Search
+keymap('n', '/', ':lua require("searchbox").incsearch()<CR>', ops)
+keymap('v', '/', '<Esc><cmd>lua require("searchbox").incsearch({visual_mode = true})<CR>', ops)
+
 -- Buffer Navigation
 keymap('n', 'L', ':bn!<CR>', ops)
 keymap('n', 'H', ':bp!<CR>', ops)

@@ -1,4 +1,3 @@
--- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 USER = vim.fn.expand('$USER')
 
 local sumneko_root_path = ""

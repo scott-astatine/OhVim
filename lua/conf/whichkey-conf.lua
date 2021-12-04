@@ -5,6 +5,7 @@ local mappings = {
     ["q"] = {"<cmd>q<CR>", "Quit"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
     ["x"] = "Ex Mode",
+    ["r"] = "Refresh NvimTree",
 
     f = {
         name = "Project",
@@ -93,9 +94,10 @@ local mappings = {
     }
 }
 
-for x = 1, 9 do
-    local cmd = "<cmd>exe " .. x .. "'wincmd w'" .. "<cr>"
-    mappings["" .. x] = {cmd, "Win " .. x}
+for i=1, 9 do
+    local cmd = "<cmd>exe " .. i .. "'wincmd w'" .. "<cr>"
+    mappings["" .. i] = {cmd, "Win " .. i}
+    mappings.b["" .. i] = {"<cmd>BufferLineGoToBuffer " .. i .. "<cr>", "Win " .. i}
 end
 
 M.config = {
@@ -123,12 +125,12 @@ M.config = {
         window = {
             border = "shadow", -- none, single, double, shadow
             position = "bottom", -- bottom, top
-            margin = {4, 3, 0, 4}, -- extra window margin [top, right, bottom, left]
+            margin = {0, 3, 0, 4}, -- extra window margin [top, right, bottom, left]
             padding = {2, 2, 2, 2} -- extra window padding [top, right, bottom, left]
         },
         layout = {
             height = {min = 6, max = 25}, -- min and max height of the columns
-            width = {min = 15, max = 50}, -- min and max width of the columns
+            width = {min = 14, max = 40}, -- min and max width of the columns
             spacing = 8, -- spacing between columns
             align = "center"
         },
@@ -143,7 +145,11 @@ M.config = {
     mappings = mappings
 }
 
-local smap = {t = {"<cmd>tabnew<cr>", "New Tab"}, v = {"<cmd>vsplit<cr>", "Vertical Split"}, h = {"<cmd>split<cr>", "Horizontal Split"}}
+local smap = {
+  t = {"<cmd>tabnew<cr>", "New Tab"},
+  v = {"<cmd>vsplit<cr>", "Vertical Split"},
+  h = {"<cmd>split<cr>", "Horizontal Split"}
+}
 
 local gmaps = {
     c = "Comment line",
@@ -165,7 +171,6 @@ wk.register(smap, {mode = "n", prefix = "s", silent = true})
 wk.register(smap, {mode = "v", prefix = "s", silent = true})
 
 -- `g` keymaps
-
 wk.register(gmaps, {mode = "v", prefix = "g", silent = true})
 wk.register(gmaps, {mode = "n", prefix = "g", silent = true})
 

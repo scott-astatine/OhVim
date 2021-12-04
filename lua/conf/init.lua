@@ -1,4 +1,5 @@
 require('conf.nvimtree-conf')
+require('conf.cmp-conf')
 require('conf.colorizer-conf')
 require('conf.treesitter-conf')
 require('conf.lualine-conf')
@@ -10,5 +11,5 @@ require('conf.whichkey-conf')
 require('conf.comment-conf')
 require('conf.telescope-conf')
 require('conf.projectnv-conf')
-
+require('conf.neorg-conf')
 

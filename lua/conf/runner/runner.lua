@@ -43,10 +43,10 @@ end
 
 M.load_json_files = function()
   -- Load json config and convert to table
-  local load_json_as_table = require("conf.runner.lib.load_json")
+  local jsonToTable = require("conf.runner.lib.load_json")
   local opt = o.get()
-  vim.g.fileCommands = load_json_as_table(opt.filetype_path) or get_conf_runners(opt.filetype)
-  vim.g.projectManager = load_json_as_table(o.get().project_path) or get_conf_runners(opt.projects)
+  vim.g.fileCommands = jsonToTable(opt.filetype_path) or get_conf_runners(opt.filetype)
+  vim.g.projectManager = jsonToTable(o.get().project_path) or get_conf_runners(opt.projects)
   vim.g.crPrefix = string.format("%s %dsplit term://", opt.term.position, opt.term.size)
 
   -- Message if json file not exist

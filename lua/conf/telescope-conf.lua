@@ -40,8 +40,14 @@ require('telescope').setup{
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
+    media_files = {
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      find_cmd = "rg" -- find command (defaults to `fd`)
+    }
 }
 
 require('telescope').load_extension('sessions')
 require('telescope').load_extension('projects')
+require('telescope').load_extension('media_files')
 
