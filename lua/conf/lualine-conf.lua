@@ -1,14 +1,4 @@
 local lualine = require 'lualine'
-local M = require('lualine.component'):extend()
-
-local default_options = {
-  symbols = { modified = '●', readonly = '' },
-}
-
-M.init = function(self, options)
-  M.super.init(self, options)
-  self.options = vim.tbl_deep_extend('keep', self.options or {}, default_options)
-end
 
 local bg = function ()
   if vim.g.transparrent then
@@ -30,6 +20,7 @@ local colors = {
   magenta  = '#c678dd',
   blue     = '#51afef',
   red      = '#eb1c5d',
+  purple   = '#be3dff'
 }
 
 -- Config
@@ -94,25 +85,26 @@ local function ins_right(component)
 end
 
 local mode_color = {
-  n = colors.red,
-  i = colors.green,
+  n = colors.green,
+  no = colors.red,
+  i = colors.red,
+  ic = colors.yellow,
   v = colors.blue,
   V = colors.blue,
   c = colors.magenta,
-  no = colors.red,
+  cv = colors.red,
   s = colors.orange,
   S = colors.orange,
-  [''] = colors.orange,
-  ic = colors.yellow,
   R = colors.violet,
   Rv = colors.violet,
-  cv = colors.red,
-  ce = colors.red,
+  Rvc = colors.violet,
+  Rvx = colors.violet,
   r = colors.cyan,
   rm = colors.cyan,
+  t = colors.red,
   ['r?'] = colors.cyan,
   ['!'] = colors.red,
-  t = colors.red,
+  [''] = colors.orange,
 }
 
 -- Left Side components
@@ -122,7 +114,7 @@ ins_left {
     return '▊'
   end,
   color = 'LualineMode',
-  padding = { left = 0, right = 1 }, -- We don't need space before this
+  padding = { left = 0, right = 1 },
 }
 
 ins_left {
@@ -137,7 +129,7 @@ ins_left {
 ins_left {
   'filesize',
   icons_enabled = true,
-  color = {fg = "#ae5cc0"},
+  color = {fg = colors.purple},
   cond = function () return conditions.buffer_not_empty() and conditions.not_nvtree() end
 }
 
@@ -148,7 +140,7 @@ ins_left {
   symbols = { modified = " ● ", readonly = "  " },
   cond = function () return conditions.buffer_not_empty() and conditions.not_nvtree() end,
   icons_enabled = true,
-  color = { fg = '#ff076a', gui = 'bold' },
+  color = { fg = '#ff375a', gui = 'bold' },
 }
 
 ins_left {
@@ -159,13 +151,13 @@ ins_left {
     color_error = { fg = colors.red },
     color_warn = { fg = colors.yellow },
     color_info = { fg = colors.cyan },
-    color_hint = { fg = '#be3dff' },
+    color_hint = { fg = colors.purple },
   },
   cond = conditions.buffer_not_empty,
 }
 ins_left {
-  'o:encoding', -- option component same as &encoding in viml
-  fmt = string.upper, -- I'm not sure why it's upper case either ;)
+  'o:encoding',
+  fmt = string.upper,
   cond = function() return conditions.hide_in_width() and conditions.buffer_not_empty() and conditions.not_nvtree() end,
   color = { fg = colors.green, gui = 'bold' },
 }
@@ -206,11 +198,10 @@ ins_right {
 
 ins_right {
   'diff',
-  -- Is it me or the symbol for modified us really weird
-  symbols = { added = ' ', modified = '柳', removed = ' ' },
+  symbols = { added = ' ', modified = '🪄', removed = ' ' },
   diff_color = {
     added = { fg = colors.green },
-    modified = { fg = colors.orange },
+    modified = { fg = colors.cyan },
     removed = { fg = colors.red },
   },
   cond = function () return conditions.check_git_workspace() and conditions.hide_in_width() and conditions.not_nvtree() end
@@ -222,9 +213,8 @@ ins_right {
     return '▊'
   end,
   color = 'LualineMode',
-  cond = conditions.buffer_not_empty,
+  cond = function() return conditions.buffer_not_empty() and conditions.not_nvtree() end,
   padding = { left = 1 },
 }
 
 lualine.setup(config)
-return M
