@@ -3,10 +3,10 @@ require('bufferline').setup {
     numbers = "ordinal",
     buffer_close_icon = '',
     close_icon = '',
-    close_command = "Bdelete %d",       -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-    left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = "Bdelete! %d",          -- can be a string | function, see "Mouse actions"
+    close_command = "Bdelete %d",
+    right_mouse_command = "Bdelete! %d",
+    left_mouse_command = "buffer %d",
+    middle_mouse_command = "Bdelete! %d",
     indicator_icon = '┃',
     modified_icon = '●',
     left_trunc_marker = '',
@@ -17,7 +17,7 @@ require('bufferline').setup {
       end
     end,
     max_name_length = 18,
-    max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
+    max_prefix_length = 20,
     tab_size = 18,
     diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
@@ -28,11 +28,12 @@ require('bufferline').setup {
     custom_filter = function(buf_number)
       if vim.bo[buf_number].filetype ~= "ex" then
         return true
-      end
-      if vim.fn.bufname(buf_number) ~= "Prompt" then
+      elseif vim.fn.bufname(buf_number) ~= "Prompt" then
         return true
-      end
-      if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
+      elseif not string.match(vim.fn.bufname(buf_number), 'term') then
+        print('Match')
+        return true
+      elseif vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
         return true
       end
     end,

@@ -16,7 +16,7 @@ keymap('v', '/', '<Esc><cmd>lua require("searchbox").incsearch({visual_mode = tr
 -- Buffer Navigation
 keymap('n', 'L', ':bn!<CR>', ops)
 keymap('n', 'H', ':bp!<CR>', ops)
-keymap('n', '<Leader>x', ':', ops)
+-- keymap('n', '<Leader>x', ':', ops)
 
 -- Completion & Lsp
 keymap('i', '<expr><TAB>', 'pumvisible() ? \"\\<C-n>\" : \\"<TAB>\"', ops)

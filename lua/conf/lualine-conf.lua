@@ -14,12 +14,12 @@ local colors = {
   yellow   = '#ECBE7B',
   cyan     = '#008080',
   darkblue = '#081633',
-  green    = '#98be65',
+  green    = '#98de65',
   orange   = '#FF8800',
   violet   = '#a9a1e1',
   magenta  = '#c678dd',
   blue     = '#51afef',
-  red      = '#eb1c5d',
+  red      = '#fb2c5d',
   purple   = '#be3dff'
 }
 
@@ -140,7 +140,7 @@ ins_left {
   symbols = { modified = " ● ", readonly = "  " },
   cond = function () return conditions.buffer_not_empty() and conditions.not_nvtree() end,
   icons_enabled = true,
-  color = { fg = '#ff375a', gui = 'bold' },
+  color = { fg = '#a70af5', gui = 'bold' },
 }
 
 ins_left {
@@ -155,12 +155,13 @@ ins_left {
   },
   cond = conditions.buffer_not_empty,
 }
-ins_left {
-  'o:encoding',
-  fmt = string.upper,
-  cond = function() return conditions.hide_in_width() and conditions.buffer_not_empty() and conditions.not_nvtree() end,
-  color = { fg = colors.green, gui = 'bold' },
-}
+
+-- ins_left {
+--   'o:encoding',
+--   fmt = string.upper,
+--   cond = function() return conditions.hide_in_width() and conditions.buffer_not_empty() and conditions.not_nvtree() end,
+--   color = { fg = colors.green, gui = 'bold' },
+-- }
 
 ins_left {
   function()
@@ -169,6 +170,18 @@ ins_left {
 }
 
 -- Right section
+
+ins_right {
+  'diff',
+  symbols = { added = ' ', modified = '🪄', removed = ' ' },
+  diff_color = {
+    added = { fg = colors.green },
+    modified = { fg = colors.purple },
+    removed = { fg = colors.red },
+  },
+  cond = function () return conditions.check_git_workspace() and conditions.hide_in_width() and conditions.not_nvtree() end
+}
+
 ins_right {
   'location',
   icons_enabled = true,
@@ -194,17 +207,6 @@ ins_right {
   icon = '',
   color = { fg = colors.green, gui = 'bold' },
   cond = function() return conditions.not_nvtree() and conditions.check_git_workspace() end
-}
-
-ins_right {
-  'diff',
-  symbols = { added = ' ', modified = '🪄', removed = ' ' },
-  diff_color = {
-    added = { fg = colors.green },
-    modified = { fg = colors.cyan },
-    removed = { fg = colors.red },
-  },
-  cond = function () return conditions.check_git_workspace() and conditions.hide_in_width() and conditions.not_nvtree() end
 }
 
 ins_right {

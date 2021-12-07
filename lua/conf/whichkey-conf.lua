@@ -2,9 +2,9 @@ local M = {}
 
 local mappings = {
     ["e"] = {"<cmd>NvimTreeFocus<CR>", "Explorer"},
-    ["q"] = {"<cmd>q<CR>", "Quit"},
+    ["q"] = {"<cmd>qall<CR>", "Quit"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
-    ["x"] = "Ex Mode",
+    ["x"] = {"<cmd>Bdelete<cr>", "Close Buffer"},
     ["r"] = "Refresh NvimTree",
 
     f = {
@@ -26,6 +26,7 @@ local mappings = {
 
     w = {
         name = "Window",
+        q = {"<cmd>q<CR>", "Quit"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         t = {"<cmd>tabnew<cr>", "New Tab"},
         l = {"<C-w>l", "Left"},
