@@ -1,5 +1,21 @@
 local M = {}
 
+M.smap = {
+  t = {"<cmd>tabnew<cr>", "New Tab"},
+  v = {"<cmd>vsplit<cr>", "Vertical Split"},
+  h = {"<cmd>split<cr>", "Horizontal Split"},
+  x = {"<cmd>term<cr>", "Open Terminal"},
+}
+
+M.gmaps = {
+    c = "Comment line",
+    b = "Comment Block",
+    d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "GoTo Definition"},
+    D = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "GoTo Declaration"},
+    r = {"<cmd>lua vim.lsp.buf.references()<cr>", "GoTo References"},
+    i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "GoTo Implementation"}
+}
+
 local mappings = {
     ["e"] = {"<cmd>NvimTreeFocus<CR>", "Explorer"},
     ["q"] = {"<cmd>q<CR>", "Quit"},
@@ -87,8 +103,8 @@ local mappings = {
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         w = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
         f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
-        r = {"<cmd>lua require('PBuild').runProject()<cr>", "Run Project"},
-        b = {"<cmd>lua require('PBuild').buildProject()<cr>", "Build Project"},
+        r = {"<cmd>lua require('PExec').runProject()<cr>", "Run Project"},
+        b = {"<cmd>lua require('PExec').buildProject()<cr>", "Build Project"},
         i = {"<cmd>LspInfo<cr>", "Info"},
         I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
         q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
@@ -100,7 +116,7 @@ local mappings = {
 for i=1, 9 do
     local cmd = "<cmd>exe " .. i .. "'wincmd w'" .. "<cr>"
     mappings["" .. i] = {cmd, "Win " .. i}
-    mappings.b["" .. i] = {"<cmd>BufferLineGoToBuffer " .. i .. "<cr>", "Win " .. i}
+    mappings.b["" .. i] = {"<cmd>BufferLineGoToBuffer " .. i .. "<cr>", "Buffer " .. i}
 end
 
 M.config = {
@@ -138,7 +154,7 @@ M.config = {
             align = "center"
         },
         hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "<leader>"}, -- hide mapping boilerplate
-        show_help = false -- show help message on the command line when the popup is visible
+        show_help = false
     },
 
     opts = {mode = "n", prefix = "<leader>", buffer = nil, silent = true, noremap = true, nowait = true},
@@ -148,33 +164,5 @@ M.config = {
     mappings = mappings
 }
 
-local smap = {
-  t = {"<cmd>tabnew<cr>", "New Tab"},
-  v = {"<cmd>vsplit<cr>", "Vertical Split"},
-  h = {"<cmd>split<cr>", "Horizontal Split"},
-  x = {"<cmd>term<cr>", "Open Terminal"},
-}
-
-local gmaps = {
-    c = "Comment line",
-    b = "Comment Block",
-    d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "GoTo Definition"},
-    D = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "GoTo Declaration"},
-    r = {"<cmd>lua vim.lsp.buf.references()<cr>", "GoTo References"},
-    i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "GoTo Implementation"}
-}
-
-local wk = require("which-key")
-wk.setup(M.config.setup)
-
--- Leader keymaps
-wk.register(M.config.mappings, M.config.opts)
-wk.register(M.config.vmappings, M.config.vopts)
--- `s` keymaps
-wk.register(smap, {mode = "n", prefix = "s", silent = true})
-wk.register(smap, {mode = "v", prefix = "s", silent = true})
-
--- `g` keymaps
-wk.register(gmaps, {mode = "v", prefix = "g", silent = true})
-wk.register(gmaps, {mode = "n", prefix = "g", silent = true})
+return M
 

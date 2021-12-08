@@ -12,4 +12,5 @@ require('conf.comment-conf')
 require('conf.telescope-conf')
 require('conf.projectnv-conf')
 require('conf.neorg-conf')
+require('conf.alpha-conf')
 

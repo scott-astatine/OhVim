@@ -1,3 +1,24 @@
+-- WhichKey keymaps
+local wkc = require('conf.whichkey-conf')
+local wk = require("which-key")
+wk.setup(wkc.config.setup)
+
+-- Leader keymaps
+wk.register(wkc.config.mappings, wkc.config.opts)
+wk.register(wkc.config.vmappings, wkc.config.vopts)
+-- `s` keymaps
+wk.register(wkc.smap, {mode = "n", prefix = "s", silent = true})
+wk.register(wkc.smap, {mode = "v", prefix = "s", silent = true})
+
+-- `g` keymaps
+wk.register(wkc.gmaps, {mode = "v", prefix = "g", silent = true})
+wk.register(wkc.gmaps, {mode = "n", prefix = "g", silent = true})
+
+-- end
+
+
+-- Explicit keymaps
+--
 local keymap = vim.api.nvim_set_keymap
 vim.g.mapleader = ' '
 

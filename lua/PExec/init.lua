@@ -23,7 +23,7 @@ end
 
 local function generateConfig()
   local c = {
-    pExeCMD = vim.g.pExeCMD,
+    pExeCMD = vim.g.pExeCMD or '',
     projectName = vim.g.projectName or '',
   }
   local ok, jsonStr = pcall(vim.fn.json_encode, c)
@@ -69,7 +69,7 @@ M.setup = function ()
     end
   else
     local dirList = walkDir(vim.fn.getcwd())
-    local dListhas = function (str)
+    local function dListhas(str)
       if string.match(dirList, str) then
         return true
       else
@@ -100,6 +100,9 @@ M.setup = function ()
     elseif dListhas(stId.cmake) then
       vim.g.pExeCMD = 'cmake'
       generateConfig()
+    elseif dListhas(stId.cpp) then
+      singleFrun = true
+      vim.g.pExeCMD = 'cpp'
     elseif dListhas(stId.lua) then
       singleFrun = true
       vim.g.pExeCMD = 'lua'
@@ -115,13 +118,16 @@ M.setup = function ()
     -- Python
     elseif dListhas(stId.django) then
       vim.g.pExeCMD = 'django'
+      generateConfig()
     elseif dListhas(stId.python) then
       singleFrun = true
       vim.g.pExeCMD = 'python'
+    else
+      print("Could not determine which language or package manager you're using!\nDefine `cmd` run, build cmd in `.PExecConf.json file")
+      generateConfig()
     end
   end
 end
-M.setup()
 
 local function outputWin(command)
   -- local buf = vim.api.nvim_create_buf()
@@ -135,9 +141,11 @@ M.runProject = function ()
   else
     if singleFrun then
       outputWin(M.dCMD(vim.g.projectName, vim.fn.bufname())[vim.g.pExeCMD].run)
-    else
+    elseif vim.g.projectName then
       local exe = M.dCMD(vim.g.projectName)[vim.g.pExeCMD].run
       outputWin(exe)
+    else
+      print("Project run cmd not configured!")
     end
   end
 end
@@ -149,8 +157,10 @@ M.buildProject = function ()
   else
     if singleFrun then
       outputWin(M.dCMD(vim.g.projectName, vim.fn.expand("%:p:~:h"))[vim.g.pExeCMD].compile)
-    else
+    elseif vim.g.projectName then
       outputWin(M.dCMD(vim.g.projectName)[vim.g.pExeCMD].build)
+    else
+      print("Project build cmd not configured!")
     end
   end
 end

@@ -36,6 +36,7 @@ vim.o.cursorline = true
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.showtabline = 2
+vim.g.always_show_bufferline = false
 vim.g.clipboard = {
   name = 'CopyQ',
   copy = {

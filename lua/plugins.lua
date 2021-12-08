@@ -38,6 +38,10 @@ return require('packer').startup(
     -- Project manager
     use 'ahmedkhalf/project.nvim'
 
+    -- Start screen
+    use 'goolord/alpha-nvim'
+    use 'BlakeJC94/alpha-nvim-fortune'
+
     -- Neorg
     use {
       "nvim-neorg/neorg",
