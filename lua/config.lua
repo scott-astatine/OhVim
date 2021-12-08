@@ -55,17 +55,6 @@ vim.g.transparrent = false
 vim.o.showmode = false
 vim.highlight.on_yank { on_visual = true }
 
--- Neovide config
-vim.g.neovide_transparency = 0.8
-vim.g.neovide_remember_window_size = 1
-vim.g.neovide_cursor_vfx_mode = "torpedo"
-vim.g.neovide_cursor_vfx_particle_lifetime = 3.2
-vim.g.neovide_floating_opacity = 0.6
-vim.g.neovide_no_idle = true
-vim.g.neovide_opacity = 0.8
-vim.g.neovide_cursor_vfx_particle_phase = 1.5
-vim.g.neovide_cursor_vfx_particle_density = 7.0
-vim.g.neovide_floating_blur = 1
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,
@@ -86,36 +75,25 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-function PrintDiagnostics(opts, bufnr, line_nr, client_id)
-  opts = opts or {}
-
-  bufnr = bufnr or 0
-  line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
-
-  local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
-  if vim.tbl_isempty(line_diagnostics) then return end
-
-  local diagnostic_message = ""
-  for i, diagnostic in ipairs(line_diagnostics) do
-    diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
-    print(diagnostic_message)
-    if i ~= #line_diagnostics then
-      diagnostic_message = diagnostic_message .. "\n"
-    end
-  end
-  vim.api.nvim_echo({{diagnostic_message, "Normal"}}, false, {})
-end
-
-vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
-
 if vim.g.transparrent then
   vim.api.nvim_command('highlight Normal guibg=NONE ctermbg=NONE')
   vim.api.nvim_command('highlight NonText guibg=NONE ctermbg=NONE')
   vim.api.nvim_command('highlight EndOfBuffer guibg=NONE ctermbg=NONE')
 end
 
+-- Neovide config
+vim.g.neovide_transparency = 0.8
+vim.g.neovide_remember_window_size = 1
+vim.g.neovide_cursor_vfx_mode = "torpedo"
+vim.g.neovide_cursor_vfx_particle_lifetime = 3.2
+vim.g.neovide_floating_opacity = 0.6
+vim.g.neovide_no_idle = true
+vim.g.neovide_opacity = 0.8
+vim.g.neovide_cursor_vfx_particle_phase = 1.5
+vim.g.neovide_cursor_vfx_particle_density = 7.0
+vim.g.neovide_floating_blur = 1
 
---- Bdelete to close buffer without exiting nvim
+-- Bdelete function to close buffer without exiting nvim or closing buffer window
 vim.cmd(
 [[
     if exists("g:loaded_bbye") || &cp | finish | endif
@@ -126,7 +104,7 @@ vim.cmd(
             let w:bbye_back = 1
 
             if buffer < 0
-                    return s:error("E516: No buffers were deleted. No match for ".a:buffer_name)
+                    return s:error("E516: No buffers were deleted. No match for " . a:buffer_name)
             endif
 
             if getbufvar(buffer, "&modified") && empty(a:bang)

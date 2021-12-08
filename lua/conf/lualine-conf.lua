@@ -129,7 +129,7 @@ ins_left {
 ins_left {
   'filesize',
   icons_enabled = true,
-  color = {fg = colors.purple},
+  color = {fg = colors.yellow},
   cond = function () return conditions.buffer_not_empty() and conditions.not_nvtree() end
 }
 

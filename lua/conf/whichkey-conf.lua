@@ -2,7 +2,7 @@ local M = {}
 
 local mappings = {
     ["e"] = {"<cmd>NvimTreeFocus<CR>", "Explorer"},
-    ["q"] = {"<cmd>qall<CR>", "Quit"},
+    ["q"] = {"<cmd>q<CR>", "Quit"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
     ["x"] = {"<cmd>Bdelete<cr>", "Close Buffer"},
     ["r"] = "Refresh NvimTree",
@@ -26,7 +26,7 @@ local mappings = {
 
     w = {
         name = "Window",
-        q = {"<cmd>q<CR>", "Quit"},
+        q = {"<cmd>qall<CR>", "Quit"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         t = {"<cmd>tabnew<cr>", "New Tab"},
         l = {"<C-w>l", "Left"},
@@ -87,6 +87,8 @@ local mappings = {
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         w = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
         f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
+        r = {"<cmd>lua require('PBuild').runProject()<cr>", "Run Project"},
+        b = {"<cmd>lua require('PBuild').buildProject()<cr>", "Build Project"},
         i = {"<cmd>LspInfo<cr>", "Info"},
         I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
         q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
@@ -104,7 +106,7 @@ end
 M.config = {
     setup = {
         plugins = {
-            marks = true, -- shows a list of your marks on ' and `
+            marks = false, -- shows a list of your marks on ' and `
             registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
             -- the presets plugin, adds help for a bunch of default keybindings in Neovim
             presets = {
@@ -119,9 +121,9 @@ M.config = {
             spelling = {enabled = true, suggestions = 20} -- use which-key for spelling hints
         },
         icons = {
-            breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-            separator = "➜", -- symbol used between a key and it's label
-            group = "+" -- symbol prepended to a group
+            breadcrumb = "≻", -- symbol used in the command line area that shows your active key combo
+            separator = "⇒ ", -- symbol used between a key and it's label
+            group = "∬" -- symbol prepended to a group
         },
         window = {
             border = "shadow", -- none, single, double, shadow
@@ -135,7 +137,7 @@ M.config = {
             spacing = 8, -- spacing between columns
             align = "center"
         },
-        hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+        hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "<leader>"}, -- hide mapping boilerplate
         show_help = false -- show help message on the command line when the popup is visible
     },
 
@@ -149,7 +151,8 @@ M.config = {
 local smap = {
   t = {"<cmd>tabnew<cr>", "New Tab"},
   v = {"<cmd>vsplit<cr>", "Vertical Split"},
-  h = {"<cmd>split<cr>", "Horizontal Split"}
+  h = {"<cmd>split<cr>", "Horizontal Split"},
+  x = {"<cmd>term<cr>", "Open Terminal"},
 }
 
 local gmaps = {

@@ -10,7 +10,6 @@ lspconf.bashls.setup {}
 
 lspconf.jsonls.setup {}
 
-lspconf.vimls.setup {}
 
 lspconf.pylsp.setup {}
 

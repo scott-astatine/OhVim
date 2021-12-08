@@ -1,7 +1,7 @@
 
 require('packer').init {
   log = { level = "warn" },
-  git = { clone_timeout = 500 },
+  git = { clone_timeout = 1000 },
   display = {
     open_fn = function()
       return require("packer.util").float { border = "rounded" }

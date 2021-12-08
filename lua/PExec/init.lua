@@ -1,0 +1,159 @@
+local M = {}
+M.dCMD = require('PExec.defaultCMD')
+local stId = require('PExec.identifiers')
+local cFcmd = {}
+local singleFrun = false
+
+
+local function loadConfig(path)
+  local contents = ''
+  local file = io.open(path, "r")
+
+  if file then
+    contents = file:read("*a")
+    local ok, res = pcall(vim.fn.json_decode, contents)
+    io.close(file)
+    if ok then
+      return res
+    else
+      return nil
+    end
+  end
+end
+
+local function generateConfig()
+  local c = {
+    pExeCMD = vim.g.pExeCMD,
+    projectName = vim.g.projectName or '',
+  }
+  local ok, jsonStr = pcall(vim.fn.json_encode, c)
+  if ok then
+    local cFile = io.open(".PExecConf.json", "w+")
+    if cFile then
+      io.write(cFile, jsonStr)
+      io.close(cFile)
+    end
+  end
+end
+
+local function walkDir(directory)
+    local t, popen = "", io.popen
+    local pfile = popen('ls "'..directory..'"')
+    for filename in pfile:lines() do
+        t = t .. " " .. filename
+    end
+    pfile:close()
+    return t
+end
+
+M.setup = function ()
+  local findfile = function (file)
+    if vim.fn.findfile(file, ';') ~= '' then
+      return true
+    else
+      return false
+    end
+  end
+  if findfile('.PExecConf.json') then
+    local confFile = loadConfig(vim.fn.getcwd() .. '/.PExecConf.json')
+    if confFile then
+      if confFile.projectName then
+        vim.g.projectName = confFile.projectName
+      end
+      if confFile.pExeCMD then
+        if confFile.cmd then
+          cFcmd = confFile.cmd
+        end
+        vim.g.pExeCMD = confFile.pExeCMD
+      end
+    end
+  else
+    local dirList = walkDir(vim.fn.getcwd())
+    local dListhas = function (str)
+      if string.match(dirList, str) then
+        return true
+      else
+        return false
+      end
+    end
+
+    -- Rust Cargo Config
+    if dListhas(stId.cargo) then
+      vim.g.pExeCMD = 'cargo'
+      generateConfig()
+    elseif dListhas(stId.rustc) then
+      singleFrun = true
+      vim.g.pExeCMD = 'rustc'
+
+    -- Yarn, Npm, & Node config
+    elseif dListhas(stId.yarn) then
+      vim.g.pExeCMD = 'yarn'
+      generateConfig()
+    elseif dListhas(stId.npm) then
+      vim.g.pExeCMD = 'npm'
+      generateConfig()
+    elseif dListhas(stId.javascript) then
+      singleFrun = true
+      vim.g.pExeCMD = 'node'
+
+    -- Cmake Config
+    elseif dListhas(stId.cmake) then
+      vim.g.pExeCMD = 'cmake'
+      generateConfig()
+    elseif dListhas(stId.lua) then
+      singleFrun = true
+      vim.g.pExeCMD = 'lua'
+
+    -- Nim & Nimble config
+    elseif dListhas(stId.nimble) then
+      vim.g.pExeCMD = 'nimble'
+      generateConfig()
+    elseif dListhas(stId.nim) then
+      singleFrun = true
+      vim.g.pExeCMD = 'nimc'
+
+    -- Python
+    elseif dListhas(stId.django) then
+      vim.g.pExeCMD = 'django'
+    elseif dListhas(stId.python) then
+      singleFrun = true
+      vim.g.pExeCMD = 'python'
+    end
+  end
+end
+M.setup()
+
+local function outputWin(command)
+  -- local buf = vim.api.nvim_create_buf()
+  vim.cmd("belowright 8 split term://" .. command)
+end
+
+M.runProject = function ()
+  M.setup()
+  if cFcmd.run then
+    outputWin(cFcmd.run)
+  else
+    if singleFrun then
+      outputWin(M.dCMD(vim.g.projectName, vim.fn.bufname())[vim.g.pExeCMD].run)
+    else
+      local exe = M.dCMD(vim.g.projectName)[vim.g.pExeCMD].run
+      outputWin(exe)
+    end
+  end
+end
+
+M.buildProject = function ()
+  M.setup()
+  if cFcmd.build then
+    outputWin(cFcmd.compile)
+  else
+    if singleFrun then
+      outputWin(M.dCMD(vim.g.projectName, vim.fn.expand("%:p:~:h"))[vim.g.pExeCMD].compile)
+    else
+      outputWin(M.dCMD(vim.g.projectName)[vim.g.pExeCMD].build)
+    end
+  end
+end
+
+
+return M
