@@ -1,10 +1,10 @@
 local M = {}
 
 M.smap = {
-  t = {"<cmd>tabnew<cr>", "New Tab"},
-  v = {"<cmd>vsplit<cr>", "Vertical Split"},
-  h = {"<cmd>split<cr>", "Horizontal Split"},
-  x = {"<cmd>term<cr>", "Open Terminal"},
+    t = {"<cmd>tabnew<cr>", "New Tab"},
+    v = {"<cmd>vsplit<cr>", "Vertical Split"},
+    h = {"<cmd>split<cr>", "Horizontal Split"},
+    x = {"<cmd>term<cr>", "Open Terminal"}
 }
 
 M.gmaps = {
@@ -81,6 +81,21 @@ local mappings = {
         u = {"<cmd>PackerUpdate<cr>", "Update"}
     },
 
+    l = {
+        name = "LangSpec",
+        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
+        w = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
+        f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
+        r = {"<cmd>lua require('PExec').runProject()<cr>", "Run Project"},
+        b = {"<cmd>lua require('PExec').buildProject()<cr>", "Build Project"},
+        g = {"<cmd>lua require('PExec').generateConfig()<cr>", "Genrate Project run/build conf"},
+        i = {"<cmd>LspInfo<cr>", "Info"},
+        I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
+        q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
+        s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
+        S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
+    },
+
     g = {
         name = "Git",
         j = {"<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk"},
@@ -96,24 +111,11 @@ local mappings = {
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
         C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
         d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff"}
-    },
-
-    l = {
-        name = "LSP",
-        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
-        w = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
-        f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
-        r = {"<cmd>lua require('PExec').runProject()<cr>", "Run Project"},
-        b = {"<cmd>lua require('PExec').buildProject()<cr>", "Build Project"},
-        i = {"<cmd>LspInfo<cr>", "Info"},
-        I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
-        q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
-        s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-        S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
     }
+
 }
 
-for i=1, 9 do
+for i = 1, 9 do
     local cmd = "<cmd>exe " .. i .. "'wincmd w'" .. "<cr>"
     mappings["" .. i] = {cmd, "Win " .. i}
     mappings.b["" .. i] = {"<cmd>BufferLineGoToBuffer " .. i .. "<cr>", "Buffer " .. i}

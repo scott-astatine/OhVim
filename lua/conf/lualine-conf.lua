@@ -140,7 +140,7 @@ ins_left {
   symbols = { modified = " ● ", readonly = "  " },
   cond = function () return conditions.buffer_not_empty() and conditions.not_nvtree() end,
   icons_enabled = true,
-  color = { fg = '#a70af5', gui = 'bold' },
+  color = { fg = '#ff5dc6', gui = 'bold' },
 }
 
 ins_left {

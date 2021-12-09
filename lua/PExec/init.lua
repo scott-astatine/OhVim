@@ -21,7 +21,7 @@ local function loadConfig(path)
   end
 end
 
-local function generateConfig()
+M.generateConfig = function ()
   local c = {
     pExeCMD = vim.g.pExeCMD or '',
     projectName = vim.g.projectName or '',
@@ -30,8 +30,8 @@ local function generateConfig()
   if ok then
     local cFile = io.open(".PExecConf.json", "w+")
     if cFile then
-      io.write(cFile, jsonStr)
-      io.close(cFile)
+      cFile:write(jsonStr)
+      cFile:close()
     end
   end
 end
@@ -80,7 +80,6 @@ M.setup = function ()
     -- Rust Cargo Config
     if dListhas(stId.cargo) then
       vim.g.pExeCMD = 'cargo'
-      generateConfig()
     elseif dListhas(stId.rustc) then
       singleFrun = true
       vim.g.pExeCMD = 'rustc'
@@ -88,10 +87,10 @@ M.setup = function ()
     -- Yarn, Npm, & Node config
     elseif dListhas(stId.yarn) then
       vim.g.pExeCMD = 'yarn'
-      generateConfig()
+      M.generateConfig()
     elseif dListhas(stId.npm) then
       vim.g.pExeCMD = 'npm'
-      generateConfig()
+      M.generateConfig()
     elseif dListhas(stId.javascript) then
       singleFrun = true
       vim.g.pExeCMD = 'node'
@@ -99,7 +98,7 @@ M.setup = function ()
     -- Cmake Config
     elseif dListhas(stId.cmake) then
       vim.g.pExeCMD = 'cmake'
-      generateConfig()
+      M.generateConfig()
     elseif dListhas(stId.cpp) then
       singleFrun = true
       vim.g.pExeCMD = 'cpp'
@@ -110,7 +109,6 @@ M.setup = function ()
     -- Nim & Nimble config
     elseif dListhas(stId.nimble) then
       vim.g.pExeCMD = 'nimble'
-      generateConfig()
     elseif dListhas(stId.nim) then
       singleFrun = true
       vim.g.pExeCMD = 'nimc'
@@ -118,16 +116,16 @@ M.setup = function ()
     -- Python
     elseif dListhas(stId.django) then
       vim.g.pExeCMD = 'django'
-      generateConfig()
     elseif dListhas(stId.python) then
       singleFrun = true
       vim.g.pExeCMD = 'python'
     else
       print("Could not determine which language or package manager you're using!\nDefine `cmd` run, build cmd in `.PExecConf.json file")
-      generateConfig()
     end
   end
 end
+
+M.setup()
 
 local function outputWin(command)
   -- local buf = vim.api.nvim_create_buf()
@@ -141,7 +139,7 @@ M.runProject = function ()
   else
     if singleFrun then
       outputWin(M.dCMD(vim.g.projectName, vim.fn.bufname())[vim.g.pExeCMD].run)
-    elseif vim.g.projectName then
+    elseif vim.g.pExeCMD then
       local exe = M.dCMD(vim.g.projectName)[vim.g.pExeCMD].run
       outputWin(exe)
     else

@@ -40,7 +40,7 @@ local function button(sc, txt, keybind, keybind_opts)
         position = "center",
         shortcut = sc,
         cursor = 5,
-        width = 50,
+        width = 48,
         align_shortcut = "right",
         hl = pick_color(),
     }
@@ -65,7 +65,7 @@ end
 local buttons = {
     type = "group",
     val = {
-        button("e", "  New file", "<cmd>ene <CR>"),
+        button("e  ", "  New file", "<cmd>ene <CR>"),
         button("SPC f f", "  Find file"),
         button("SPC f r", "   Recently opened files"),
         -- button("SPC f m", "  Jump to bookmarks"),
