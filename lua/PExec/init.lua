@@ -128,7 +128,6 @@ end
 M.setup()
 
 local function outputWin(command)
-  -- local buf = vim.api.nvim_create_buf()
   vim.cmd("belowright 8 split term://" .. command)
 end
 

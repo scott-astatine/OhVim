@@ -57,6 +57,7 @@ local mappings = {
         f = {"<cmd>Telescope buffers<cr>", "Find"},
         b = {"<cmd>bp<cr>", "Previous"},
         w = {"<cmd>Bwipeout<cr>", "Wipeout"},
+        h = {"<cmd>Alpha<cr>", "Start Buffer"},
         c = {"<cmd>Bdelete<CR>", "Close Buffer"},
         p = {"<cmd>BufferLinePickClose<cr>", "Pick close buffers"},
         D = {"<cmd>BufferLineSortByDirectory<cr>", "Sort by directory"},
@@ -106,10 +107,11 @@ local mappings = {
         R = {"<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer"},
         s = {"<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk"},
         u = {"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk"},
+        f = {"<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage File"},
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
-        c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
-        C = {"<cmd>Telescope git_bcommits<cr>", "Checkout commit(for current file)"},
+        c = {"<cmd>Telescope git_commits<cr>", "Checkout Commit"},
+        C = {"<cmd>Telescope git_bcommits<cr>", "Checkout Commit(for current file)"},
         d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff"}
     }
 

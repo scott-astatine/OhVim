@@ -58,7 +58,7 @@ local conditions = {
     return vim.fn.empty(vim.fn.expand '%:t') ~= 1
   end,
   hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
+    return vim.fn.winwidth(vim.fn.win_getid() - 1000) > 100
   end,
   check_git_workspace = function()
     local filepath = vim.fn.expand '%:p:h'
@@ -168,6 +168,14 @@ ins_left {
     return '%='
   end,
 }
+ins_right {
+  function ()
+    vim.api.nvim_command('hi! guifg=' .. colors.darkblue .. ' guibg=' .. colors.bg)
+    return string.format([[%s]], os.date('%H:%M:%S'))
+  end,
+  cond = function () return conditions.hide_in_width() and conditions.not_nvtree() end
+}
+
 
 -- Right section
 
@@ -179,13 +187,13 @@ ins_right {
     modified = { fg = colors.purple },
     removed = { fg = colors.red },
   },
-  cond = function () return conditions.check_git_workspace() and conditions.hide_in_width() and conditions.not_nvtree() end
+  cond = function () return conditions.check_git_workspace() and conditions.not_nvtree() end
 }
 
 ins_right {
   'location',
   icons_enabled = true,
-  cond = conditions.not_nvtree,
+  cond = function () return conditions.hide_in_width() and conditions.not_nvtree() end,
   color = { fg = colors.orange }
 }
 

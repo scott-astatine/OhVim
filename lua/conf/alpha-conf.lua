@@ -10,12 +10,17 @@ end
 local default_header = {
     type = "text",
     val = {
-     "  █████╗ ██╗  ██╗██╗██╗   ██╗██╗███╗   ███╗",
-     " ██╔══██╗██║  ██║██║██║   ██║██║████╗ ████║",
-     " ██║  ██║███████║██║╚██╗ ██╔╝██║██╔████╔██║",
-     " ██║  ██║██╔══██║╚═╝ ╚████╔╝ ██║██║╚██╔╝██║",
-     " ╚█████╔╝██║  ██║██╗  ╚██╔╝  ██║██║ ╚═╝ ██║",
-     "  ╚════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝     ╚═╝",
+      "   ❇                               。。。。。。。。。。。。。。。。。。。。。。。。。                      ",
+      "       ❇   ✳    ❇   ❇  ❇          /                                                /    ✳   ✳              ",
+      "   ❇        ✳     ❇   ❇          /                                                /        ❇               ",
+      " .❇.  ❇   ❇     ❇   ❇. ..❇....../ █████╗ ██╗  ██╗██╗██╗   ██╗██╗███╗   ███╗      /    ❇ ✳ ✳  ✳ ✳.    .... .",
+      " ...❇   ❇ ❇           ........./ ██╔══██╗██║  ██║██║██║   ██║██║████╗ ████║     /        ✳ ✳   ....  .. ...",
+      " ........  ......❇ ❇ ❇. ❇ ❇ ❇ /  ██║  ██║███████║██║╚██╗ ██╔╝██║██╔████╔██║    /.   ✳ ✳ ✳  ❇ ... ... ... ..",
+      " .. ❇   ❇.. ..❇....❇.. ..... /   ██║  ██║██╔══██║╚═╝ ╚████╔╝ ██║██║╚██╔╝██║   /..  ✳  ✳ ❇✳  ✳ ✳ . ..  .  ..",
+      " .... . ✳  ✳  ❇ ✳... .❇...../    ╚█████╔╝██║  ██║██╗  ╚██╔╝  ██║██║ ╚═╝ ██║  /..      ❇   .... ... .....  .",
+      " .............❇......❇...../      ╚════╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝     ╚═╝ /.......... ✳ ...        ✳  ...",
+      "  ❇   ❇    ❇              /                                                /          ❇         ❇          ",
+      "  ❇    ❇                  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾    ❇                 ❇         ",
     },
     opts = {
         position = "center",
@@ -42,7 +47,7 @@ local function button(sc, txt, keybind, keybind_opts)
         cursor = 5,
         width = 48,
         align_shortcut = "right",
-        hl = pick_color(),
+        hl = "Keyword",
     }
     if keybind then
         keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
@@ -67,7 +72,7 @@ local buttons = {
     val = {
         button("e  ", "  New file", "<cmd>ene <CR>"),
         button("SPC f f", "  Find file"),
-        button("SPC f r", "   Recently opened files"),
+        button("SPC f r", " Recently opened files"),
         -- button("SPC f m", "  Jump to bookmarks"),
         button("SPC s l", "  Open last session"),
         button("SPC s f", "  Open a saved session"),
@@ -86,7 +91,7 @@ local section = {
 
 local opts = {
     layout = {
-        { type = "padding", val = 3 },
+        { type = "padding", val = 2 },
         section.header,
         { type = "padding", val = 4 },
         section.buttons,
@@ -105,6 +110,5 @@ alpha.setup(opts)
 -- Disable folding on alpha buffer
 vim.cmd([[
     autocmd FileType alpha setlocal nofoldenable
-    autocmd FileType alpha set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
 ]])
 

@@ -1,7 +1,8 @@
 -- Colorscheme config
 vim.g.onedark_transparrent_background = true
-vim.g.onedark_style = 'warmer'
+vim.g.onedark_style = 'deep'
 vim.g.onedark_italic_comment = true
+
 
 require('neoscroll').setup()
 require('onedark').setup()
@@ -18,6 +19,7 @@ require('session_manager').setup({
   autosave_last_session = false,
   autosave_ignore_not_normal = true,
 })
+
 
 
 -- Vim settings

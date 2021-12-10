@@ -51,7 +51,7 @@ require('bufferline').setup {
     persist_buffer_sort = true,
     separator_style = "slant",
     enforce_regular_tabs = true,
-    always_show_bufferline = vim.g.always_show_bufferline,
+    always_show_bufferline = false,
     sort_by = 'id'
   }
 }
