@@ -8,7 +8,7 @@ local M = {
   nim = ".nim",
   lua = ".lua",
   yarn = "yarn.lock",
-  npm = "package-lock.json",
+  npm = "-lock.json",
   django = "manage.py",
   javascript = ".js",
 }

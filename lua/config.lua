@@ -1,6 +1,6 @@
 -- Colorscheme config
 vim.g.onedark_transparrent_background = true
-vim.g.onedark_style = 'deep'
+vim.g.onedark_style = 'warmer'
 vim.g.onedark_italic_comment = true
 
 
@@ -26,7 +26,7 @@ require('session_manager').setup({
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = 'a'
-vim.o.guifont = 'Fira Code:h9'
+vim.o.guifont = 'JetBrains Mono:h9'
 vim.o.wrap = false
 vim.o.smarttab = true
 vim.o.splitbelow = true
@@ -92,6 +92,7 @@ vim.g.neovide_cursor_vfx_particle_lifetime = 3.2
 vim.g.neovide_floating_opacity = 0.6
 vim.g.neovide_no_idle = true
 vim.g.neovide_opacity = 0.8
+vim.g.neovide_letter_spacing = 0.01
 vim.g.neovide_cursor_vfx_particle_phase = 1.5
 vim.g.neovide_cursor_vfx_particle_density = 7.0
 vim.g.neovide_floating_blur = 1

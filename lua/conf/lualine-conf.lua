@@ -4,13 +4,13 @@ local bg = function ()
   if vim.g.transparrent then
     return '#e0e11'
   else
-    return '#1c1e1c'
+    return '#2a2b2e'
   end
 end
 
 local colors = {
   bg       = bg(),
-  fg       = '#bbc2cf',
+  fg       = '#dfdfcf',
   yellow   = '#ECBE7B',
   cyan     = '#008080',
   darkblue = '#081633',
@@ -24,11 +24,14 @@ local colors = {
 }
 
 -- Config
+local onedark = require('lualine.themes.onedark')
+onedark.normal.c.fg = '#e0ffa5'
+onedark.normal.c.bg = colors.bg
 local config = {
   options = {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
-    theme = 'onedark',
+    theme = onedark,
   },
   sections = {
     -- these are to remove the defaults
@@ -169,11 +172,9 @@ ins_left {
   end,
 }
 ins_right {
-  function ()
-    vim.api.nvim_command('hi! guifg=' .. colors.darkblue .. ' guibg=' .. colors.bg)
-    return string.format([[%s]], os.date('%H:%M:%S'))
-  end,
-  cond = function () return conditions.hide_in_width() and conditions.not_nvtree() end
+  [[os.date('%a,%d | %H:%M')]],
+  cond = function () return conditions.hide_in_width() and conditions.not_nvtree() end,
+  color = { fg = colors.fg, gui = 'bold'}
 }
 
 
@@ -193,21 +194,21 @@ ins_right {
 ins_right {
   'location',
   icons_enabled = true,
-  cond = function () return conditions.hide_in_width() and conditions.not_nvtree() end,
-  color = { fg = colors.orange }
+  cond = function() return conditions.buffer_not_empty() and conditions.not_nvtree() end,
+  color = { fg = colors.yellow }
 }
 
 ins_right {
   'filetype',
   icons_enabled = true,
   color = { fg = colors.green, gui = 'bold' },
-  cond = conditions.not_nvtree,
+  cond = function() return conditions.buffer_not_empty() and conditions.not_nvtree() end,
 }
 
 ins_right {
   'progress',
-  cond = conditions.not_nvtree,
-  color = { fg = colors.violet, gui = 'bold' }
+  cond = function() return conditions.buffer_not_empty() and conditions.not_nvtree() end,
+  color = { fg = colors.violet }
 }
 
 ins_right {
@@ -223,7 +224,7 @@ ins_right {
     return '▊'
   end,
   color = 'LualineMode',
-  cond = function() return conditions.buffer_not_empty() and conditions.not_nvtree() end,
+  cond = function() return conditions.hide_in_width() and conditions.not_nvtree() end,
   padding = { left = 1 },
 }
 

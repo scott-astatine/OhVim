@@ -43,17 +43,11 @@ keymap('i', 'jj', '<ESC>', ops)
 -- Smooth Scorlling
 local t = {}
 t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
-wkc.config.mappings['<C-u>'] = "Smooth Move Up"
 t['<C-d>'] = {'scroll', {'vim.wo.scroll', 'true', '250'}}
-wkc.config.mappings['<C-d>'] = "Smooth Move Down"
 t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '450'}}
-wkc.config.mappings['<C-b>'] = "Page Up"
 t['<C-f>'] = {'scroll', {'vim.api.nvim_win_get_height(0)', 'true', '450'}}
-wkc.config.mappings['<C-b>'] = "Page Down"
-t['X'] = {'scroll', {'-0.10', 'false', '100'}}
-wkc.config.mappings['X'] = "Scroll Up"
+t['F'] = {'scroll', {'-0.10', 'false', '100'}}
 t['N'] = {'scroll', {'0.10', 'false', '100'}}
-wkc.config.mappings['N'] = "Scroll Down"
 t['zt'] = {'zt', {'250'}}
 t['zz'] = {'zz', {'250'}}
 t['zb'] = {'zb', {'250'}}
@@ -74,5 +68,4 @@ wk.register(wkc.smap, {mode = "v", prefix = "s", silent = true})
 wk.register(wkc.gmaps, {mode = "v", prefix = "g", silent = true})
 wk.register(wkc.gmaps, {mode = "n", prefix = "g", silent = true})
 
--- end
 

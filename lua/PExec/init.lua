@@ -87,10 +87,8 @@ M.setup = function ()
     -- Yarn, Npm, & Node config
     elseif dListhas(stId.yarn) then
       vim.g.pExeCMD = 'yarn'
-      M.generateConfig()
     elseif dListhas(stId.npm) then
       vim.g.pExeCMD = 'npm'
-      M.generateConfig()
     elseif dListhas(stId.javascript) then
       singleFrun = true
       vim.g.pExeCMD = 'node'
@@ -98,7 +96,6 @@ M.setup = function ()
     -- Cmake Config
     elseif dListhas(stId.cmake) then
       vim.g.pExeCMD = 'cmake'
-      M.generateConfig()
     elseif dListhas(stId.cpp) then
       singleFrun = true
       vim.g.pExeCMD = 'cpp'

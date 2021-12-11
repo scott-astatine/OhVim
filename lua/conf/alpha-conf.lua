@@ -72,7 +72,7 @@ local buttons = {
     val = {
         button("e  ", "  New file", "<cmd>ene <CR>"),
         button("SPC f f", "  Find file"),
-        button("SPC f r", " Recently opened files"),
+        button("SPC f r", "  Recently opened files"),
         -- button("SPC f m", "  Jump to bookmarks"),
         button("SPC s l", "  Open last session"),
         button("SPC s f", "  Open a saved session"),
