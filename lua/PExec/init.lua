@@ -122,8 +122,6 @@ M.setup = function ()
   end
 end
 
-M.setup()
-
 local function outputWin(command)
   vim.cmd("belowright 8 split term://" .. command)
 end

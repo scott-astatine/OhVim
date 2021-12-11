@@ -126,8 +126,8 @@ end
 M.config = {
     setup = {
         plugins = {
-            marks = false, -- shows a list of your marks on ' and `
-            registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+            marks = false,
+            registers = true,
             -- the presets plugin, adds help for a bunch of default keybindings in Neovim
             presets = {
                 operators = false, -- adds help for operators like d, y, ...
@@ -138,16 +138,16 @@ M.config = {
                 z = true, -- bindings for folds, spelling and others prefixed with z
                 g = true -- bindings for prefixed with g
             },
-            spelling = {enabled = true, suggestions = 20} -- use which-key for spelling hints
+            spelling = {enabled = true, suggestions = 20}
         },
         icons = {
-            breadcrumb = "≻", -- symbol used in the command line area that shows your active key combo
-            separator = "⇒ ", -- symbol used between a key and it's label
-            group = "∬" -- symbol prepended to a group
+            breadcrumb = "≻",
+            separator = "⇒ ",
+            group = "∬"
         },
         window = {
-            border = "shadow", -- none, single, double, shadow
-            position = "bottom", -- bottom, top
+            border = "shadow",
+            position = "bottom",
             margin = {0, 3, 0, 4}, -- extra window margin [top, right, bottom, left]
             padding = {2, 2, 2, 2} -- extra window padding [top, right, bottom, left]
         },
@@ -157,7 +157,7 @@ M.config = {
             spacing = 8, -- spacing between columns
             align = "center"
         },
-        hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "<leader>"}, -- hide mapping boilerplate
+        hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "},-- hide mapping boilerplate
         show_help = false
     },
 
