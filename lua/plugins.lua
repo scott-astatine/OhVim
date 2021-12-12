@@ -37,6 +37,7 @@ return require('packer').startup(
 
     -- Project manager
     use 'ahmedkhalf/project.nvim'
+    use {'scott-astatine/Executer.nvim', as = 'Executer'}
 
     -- Start screen
     use 'goolord/alpha-nvim'
