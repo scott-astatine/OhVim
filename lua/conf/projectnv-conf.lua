@@ -11,16 +11,15 @@ require('project_nvim').setup {
 
     -- All the patterns used to detect root dir, when **"pattern"** is in
     -- detection_methods
-    patterns = {".git", "Makefile", "package.json", "Cargo.toml", "*.nimble", "CmakeLists.txt"},
+    patterns = {".git", "Makefile", "package.json", "Cargo.toml", "*.nimble", "CmakeLists.txt", "yarn.lock", "manage.py", "pubspec.yaml"},
 
-    -- BUG  fix this glitch
     -- Table of lsp clients to ignore by name
     -- eg: { "efm", ... }
     ignore_lsp = {},
 
     -- Don't calculate root dir on specific directories
     -- Ex: { "~/.cargo/*", ... }
-    exclude_dirs = {},
+    exclude_dirs = {'target', 'node_modules', 'build'},
 
     -- Show hidden files in telescope
     show_hidden = false,

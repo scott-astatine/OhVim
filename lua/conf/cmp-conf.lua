@@ -1,4 +1,3 @@
-vim.o.completeopt = "menuone,noselect"
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -12,7 +11,7 @@ local luasnip = require("luasnip")
 cmp.setup({
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(args.body) -- For `luasnip` users.
+            luasnip.lsp_expand(args.body)
         end
     },
     mapping = {

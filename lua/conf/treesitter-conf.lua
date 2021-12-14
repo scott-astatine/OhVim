@@ -10,29 +10,63 @@ parser_configs.norg = {
 
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-    ignore_install = {
-      "haskell",
-      'r',
-      'ada',
-      'd',
-      'c#',
-      'devicetree',
-      'fusion',
-      'hcl',
+    ensure_installed = {
+      'rust',
+      'lua',
+      'c',
+      'cpp',
+      'javascript',
+      'julia',
+      'typescript',
+      'tsx',
+      'html',
+      'css',
+      'norg',
+      'commonlisp',
+      'python',
+      'bash',
+      'fish',
+      'json',
+      'toml',
       'graphql',
-      'php',
-      'surface',
-      'yang',
-      'json5',
-      'jsonc',
-    }, -- List of parsers to ignore installing
+      'go',
+      'gdscript',
+      'rst',
+      'cmake',
+      'vim',
+      'dot',
+      'glsl',
+      'scss',
+      'svelte',
+      'comment',
+      'godot_resource',
+
+    }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+    ignore_install = {}, -- List of parsers to ignore installing
     highlight = {
-        enable = true, -- false will disable the whole extension
-        additional_vim_regex_highlighting = false
+      enable = true, -- false will disable the whole extension
+      additional_vim_regex_highlighting = true,
+      disable = { "latex" },
     },
-    playground = {enable = true, updatetime = 25},
+    playground = {
+      enable = false,
+      disable = {},
+      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+      persist_queries = false, -- Whether the query persists across vim sessions
+      keybindings = {
+        toggle_query_editor = "o",
+        toggle_hl_groups = "i",
+        toggle_injected_languages = "t",
+        toggle_anonymous_nodes = "a",
+        toggle_language_display = "I",
+        focus_language = "f",
+        unfocus_language = "F",
+        update = "R",
+        goto_node = "<cr>",
+        show_help = "?",
+      },
+    },
     rainbow = {enable = true}
 }
 

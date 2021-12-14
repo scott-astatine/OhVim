@@ -148,7 +148,7 @@ ins_left {
 
 ins_left {
   'diagnostics',
-  sources = { 'nvim_lsp' },
+  sources = { 'nvim_diagnostic' },
   symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
   diagnostics_color = {
     color_error = { fg = colors.red },

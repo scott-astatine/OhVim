@@ -23,6 +23,7 @@ return require('packer').startup(
     use {'dracula/vim', as = 'dracula'}
     use 'navarasu/onedark.nvim'
     use 'norcalli/nvim-colorizer.lua'
+    use 'real-99/onedarker.nvim'
 
     use 'moll/vim-bbye'
 

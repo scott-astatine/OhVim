@@ -30,8 +30,7 @@ require('bufferline').setup {
         return true
       elseif vim.fn.bufname(buf_number) ~= "Prompt" then
         return true
-      elseif not string.match(vim.fn.bufname(buf_number), 'term') then
-        print('Match')
+      elseif vim.bo[buf_number].filetype == 'Executer' then
         return true
       elseif vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
         return true
@@ -40,7 +39,7 @@ require('bufferline').setup {
     offsets = {
       {
         filetype = "NvimTree",
-        text = "🛠 Ⲣ𝖗𝖔𝖏𝖊𝖈𝖙 ⚙️",
+        text = "Project",
         text_align = "center",
       }
     },
@@ -50,8 +49,8 @@ require('bufferline').setup {
     show_tab_indicators = true,
     persist_buffer_sort = true,
     separator_style = "slant",
-    enforce_regular_tabs = true,
-    always_show_bufferline = false,
+    enforce_regular_tabs = false,
+    always_show_bufferline = vim.g.always_show_bufferline,
     sort_by = 'id'
   }
 }
