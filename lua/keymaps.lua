@@ -94,19 +94,26 @@ local mappings = {
         t = {"<cmd>Telescope live_grep<cr>", "Text"},
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
         C = {"<cmd>Telescope commands<cr>", "Commands"},
-        P = {"<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme with Preview"}
 
     },
 
     w = {
         name = "Window",
-        q = {"<cmd>qall<CR>", "Quit"},
+        q = {"<cmd>qall<CR>", "Quit Nvim"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         t = {"<cmd>tabnew<cr>", "New Tab"},
         l = {"<C-w>l", "Left"},
         h = {"<C-w>h", "Right"},
         j = {"<C-w>j", "Up"},
-        k = {"<C-w>k", "Down"}
+        k = {"<C-w>k", "Down"},
+        ['>'] = {"<C-w>>", "Increase width"},
+        ['<'] = {"<C-w><", "Decrease width "},
+        ['='] = {"<C-w>=", "Equal height & width"},
+        ['|'] = {"<C-w>|", "Max out current win"},
+        x = {"<C-w>x", "Swap current with next"},
+        w = {"<C-w>w", "Switch Window"},
+        T = {"<C-w>T", "Break out into Tab "},
+        P = {"<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme with Preview"}
     },
 
     b = {

@@ -12,6 +12,8 @@ require('packer').init {
 
 return require('packer').startup(
   function(use)
+    --- Start OhVim required plugins
+    --
     -- Packer
     use { 'wbthomason/packer.nvim', opt = true }
     use 'karb94/neoscroll.nvim'
@@ -114,6 +116,8 @@ return require('packer').startup(
         'hrsh7th/nvim-cmp'
       }
     }
+    --- End OhVim required plugins
+    use 'alaviss/nim.nvim'
 
 end)
 

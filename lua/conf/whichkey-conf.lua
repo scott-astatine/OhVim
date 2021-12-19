@@ -23,7 +23,7 @@ M.config = {
             group = "∬"
         },
         window = {
-            border = "shadow",
+            border = "single",
             position = "bottom",
             margin = {0, 3, 0, 4}, -- extra window margin [top, right, bottom, left]
             padding = {2, 2, 2, 2} -- extra window padding [top, right, bottom, left]

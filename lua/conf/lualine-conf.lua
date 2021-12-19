@@ -4,7 +4,7 @@ local bg = function ()
   if vim.g.transparrent then
     return '#e0e11'
   else
-    return '#2a2b2e'
+    return '#2b2b2c'
   end
 end
 
@@ -24,14 +24,14 @@ local colors = {
 }
 
 -- Config
-local onedark = require('lualine.themes.onedark')
-onedark.normal.c.fg = '#e0ffa5'
-onedark.normal.c.bg = colors.bg
+local theme = require('lualine.themes.powerline_dark')
+-- theme.normal.c.fg = '#c9efaf'
+-- theme.normal.c.bg = colors.bg
 local config = {
   options = {
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
-    theme = onedark,
+    theme = theme,
   },
   sections = {
     -- these are to remove the defaults
@@ -201,6 +201,7 @@ ins_right {
 ins_right {
   'filetype',
   icons_enabled = true,
+  padding = 1,
   color = { fg = colors.green, gui = 'bold' },
   cond = function() return conditions.buffer_not_empty() and conditions.not_nvtree() end,
 }

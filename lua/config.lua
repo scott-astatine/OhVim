@@ -24,7 +24,7 @@ local Opts = {
     termguicolors = true,
     cursorline = true,
     shiftwidth = 2,
-    updatetime = 2000,
+    updatetime = 700,
     softtabstop = 2,
     showtabline = 2,
     incsearch = true,
@@ -83,7 +83,7 @@ if vim.g.transparrent then
 end
 
 require('neoscroll').setup()
-require('onedarker').setup()
+require('onedark').setup()
 require('conf')
 require("todo-comments").setup()
 
