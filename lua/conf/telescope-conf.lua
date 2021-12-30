@@ -10,7 +10,7 @@ require('telescope').setup{
       sorting_strategy = "descending",
       layout_strategy = "horizontal",
       layout_config = {
-        width = 0.85,
+        width = 0.9,
         preview_cutoff = 120,
         horizontal = { mirror = false },
         vertical = { mirror = false },
@@ -19,6 +19,8 @@ require('telescope').setup{
         i = {
           ["<C-n>"] = actions.move_selection_next,
           ["<C-p>"] = actions.move_selection_previous,
+          ["<TAB>"] = actions.move_selection_next,
+          ["<S-TAB>"] = actions.move_selection_previous,
           ["<C-c>"] = actions.close,
           ["<ESC>"] = actions.close,
           ["<C-j>"] = actions.cycle_history_next,
@@ -33,7 +35,7 @@ require('telescope').setup{
         },
       },
       file_ignore_patterns = {},
-      path_display = { shorten = 5 },
+      path_display = { shorten = 8 },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
@@ -42,7 +44,7 @@ require('telescope').setup{
     },
     media_files = {
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = {"png", "webp", "jpg", "jpeg"},
+      filetypes = {"png", "webp", "jpg", "jpeg", "mp4", "mkv"},
       find_cmd = "rg" -- find command (defaults to `fd`)
     }
 }

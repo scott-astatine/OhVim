@@ -1,18 +1,5 @@
 -- NvimTree Config
 local nvimtree = require('nvim-tree')
-vim.g.nvim_tree_refresh_wait = 5000
-vim.g.nvim_tree_window_picker_exclude = {
-  ['filetype'] = {
-   'notify',
-   '.git',
-   'node_modules',
-   'packer',
-   'qf'
-  },
-  ['buftype'] = {
-   'terminal'
-  }
-}
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local mapL = {
@@ -76,7 +63,7 @@ local nvimtreeconf = {
     },
     update_focused_file = {
       enable      = true,
-      update_cwd  = true,
+      update_cwd  = false,
       ignore_list = {}
     },
     system_open = {
@@ -140,5 +127,22 @@ local nvimtreeconf = {
   },
 }
 vim.g.nvimTreeConfig = nvimtreeconf
+vim.g.nvim_tree_icons = nvimtreeconf.icons
+vim.g.nvim_tree_special_files = {}
+vim.g.nvim_tree_refresh_wait = 500
+vim.g.nvim_tree_window_picker_exclude = {
+  ['filetype'] = {
+   'notify',
+   '.git',
+   'node_modules',
+   'packer',
+   'qf'
+  },
+  ['buftype'] = {
+   'terminal'
+  }
+}
+vim.cmd[[ highlight NvimTreeFolderIcon guifg=#0fac5e ]]
+
 
 nvimtree.setup(vim.g.nvimTreeConfig.setup)

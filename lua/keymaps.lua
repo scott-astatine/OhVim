@@ -62,7 +62,13 @@ local smap = {
     t = {"<cmd>tabnew<cr>", "New Tab"},
     v = {"<cmd>vsplit<cr>", "Vertical Split"},
     h = {"<cmd>split<cr>", "Horizontal Split"},
-    x = {"<cmd>term<cr>", "Open Terminal"}
+}
+
+
+local tmap = {
+    h = {"<cmd>lua splitTerm(0)<cr>", "Horizontally Split Terminal"},
+    v = {"<cmd>lua splitTerm(1)<cr>", "Vertically Split Terminal"},
+    t = {"<cmd>lua openTerm()<cr>", "Open Terminal"},
 }
 
 local gmaps = {
@@ -108,8 +114,8 @@ local mappings = {
         k = {"<C-w>k", "Down"},
         ['>'] = {"<C-w>>", "Increase width"},
         ['<'] = {"<C-w><", "Decrease width "},
-        ['='] = {"<C-w>=", "Equal height & width"},
-        ['|'] = {"<C-w>|", "Max out current win"},
+        e = {"<C-w>=", "Equal height & width"},
+        f = {"<C-w>|", "Max out current win"},
         x = {"<C-w>x", "Swap current with next"},
         w = {"<C-w>w", "Switch Window"},
         T = {"<C-w>T", "Break out into Tab "},
@@ -199,6 +205,8 @@ wk.register(wkc.config.vmappings, wkc.config.vopts)
 wk.register(smap, {mode = "n", prefix = "s", silent = true})
 wk.register(smap, {mode = "v", prefix = "s", silent = true})
 
+-- Terminal keymaps
+wk.register(tmap, {mode = "n", prefix = "t", silent = true})
 -- `g` keymaps
 wk.register(gmaps, {mode = "v", prefix = "g", silent = true})
 wk.register(gmaps, {mode = "n", prefix = "g", silent = true})

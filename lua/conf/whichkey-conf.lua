@@ -20,7 +20,7 @@ M.config = {
         icons = {
             breadcrumb = "≻",
             separator = "⇒ ",
-            group = "∬"
+            group = "∬ "
         },
         window = {
             border = "single",
