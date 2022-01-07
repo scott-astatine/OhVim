@@ -172,7 +172,7 @@ ins_left {
   end,
 }
 ins_right {
-  [[os.date('%a,%d | %H:%M')]],
+  [[os.date('%b %d,%a | %H:%M')]],
   cond = function () return conditions.hide_in_width() and conditions.not_nvtree() end,
   color = { fg = colors.fg, gui = 'bold'}
 }

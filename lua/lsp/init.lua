@@ -28,7 +28,6 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
-vim.cmd [[ autocmd CursorHold * lua vim.lsp.buf.hover() ]]
 
 vim.diagnostic.config({virtual_text = true, signs = true, underline = true, update_in_insert = false, severity_sort = false})
 

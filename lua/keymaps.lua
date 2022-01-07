@@ -66,9 +66,9 @@ local smap = {
 
 
 local tmap = {
-    h = {"<cmd>lua splitTerm(0)<cr>", "Horizontally Split Terminal"},
+    h = {"<cmd>lua splitTerm(2)<cr>", "Horizontally Split Terminal"},
     v = {"<cmd>lua splitTerm(1)<cr>", "Vertically Split Terminal"},
-    t = {"<cmd>lua openTerm()<cr>", "Open Terminal"},
+    t = {"<cmd>lua floatingTerm(3)<cr>", "Open Terminal"},
 }
 
 local gmaps = {
@@ -85,8 +85,14 @@ local mappings = {
     ["q"] = {"<cmd>q<CR>", "Quit"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
     ["x"] = {"<cmd>Bdelete<cr>", "Close Buffer"},
+    ["<SPC>"] = {"<ESC>", "ESC"},
     ["r"] = "Refresh NvimTree",
 
+    c = {
+        name = "Config",
+        r = {"<cmd>so " .. vim.fn.stdpath('config') .. "/init.lua" .. "<cr>", "Reload config"},
+        o = {"<cmd>e " .. vim.fn.stdpath('config') .. "/init.lua" .. "<cr>", "Reload config"}
+    },
     f = {
         name = "Project",
         f = {"<cmd>Telescope find_files<CR>", "Find File"},
@@ -113,7 +119,7 @@ local mappings = {
         j = {"<C-w>j", "Up"},
         k = {"<C-w>k", "Down"},
         ['>'] = {"<C-w>>", "Increase width"},
-        ['<'] = {"<C-w><", "Decrease width "},
+        ['<'] = {"<C-w><", "Decrease breadth"},
         e = {"<C-w>=", "Equal height & width"},
         f = {"<C-w>|", "Max out current win"},
         x = {"<C-w>x", "Swap current with next"},
@@ -155,15 +161,14 @@ local mappings = {
 
     l = {
         name = "LangSpec",
-        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
-        w = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
+        d = {"<cmd>Telescope diagnostics " .. vim.fn.bufnr() .. "<cr>", "Document Diagnostics"},
+        w = {"<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics"},
         f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
         r = {"<cmd>lua require('Executer').runProject()<cr>", "Run Project"},
         b = {"<cmd>lua require('Executer').buildProject()<cr>", "Build Project"},
         g = {"<cmd>lua require('Executer').generateConfig()<cr>", "Gen Project run/build conf"},
         i = {"<cmd>LspInfo<cr>", "Info"},
-        I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
-        q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
+        u = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
     },

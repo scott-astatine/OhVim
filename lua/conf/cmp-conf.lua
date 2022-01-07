@@ -61,6 +61,7 @@ cmp.setup({
 
 })
 
+vim.cmd [[ autocmd CursorHold * lua vim.lsp.buf.hover() ]]
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
 

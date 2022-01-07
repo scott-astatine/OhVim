@@ -47,7 +47,7 @@ local function button(sc, txt, keybind, keybind_opts)
         cursor = 5,
         width = 48,
         align_shortcut = "right",
-        hl = "Keyword",
+        hl = "StorageClass",
     }
     if keybind then
         keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })

@@ -32,6 +32,8 @@ return require('packer').startup(function(use)
 
     use 'MunifTanjim/nui.nvim'
 
+    use {'edluffy/hologram.nvim'}
+
     -- Project manager
     use 'ahmedkhalf/project.nvim'
     use {'scott-astatine/Executer.nvim', as = 'Executer'}
