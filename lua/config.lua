@@ -8,8 +8,8 @@ local Opts = {
     softtabstop = 4,
     shiftwidth = 4,
     tabstop = 8,
-    mouse = 'a',
-    guifont = 'JetBrains Mono Medium:h8',
+    mouse = "a",
+    guifont = "JetBrains Mono Medium:h8",
     linespace = 0,
     wrap = false,
     colorcolumn = "99999",
@@ -43,22 +43,23 @@ local Opts = {
     title = true,
     numberwidth = 4,
     signcolumn = "yes",
-    completeopt = "menuone,noselect"
-
+    completeopt = "menuone,noselect",
 }
 
 local globals = {
     transparrent = false,
+    term_in_insert = true,
     always_show_bufferline = true,
-    onedark_style = 'warmer',
+    onedark_style = "deep",
     onedark_italic_comment = true,
+    format_on_save = true,
 
     -- Neovide config
     neovide_transparency = 0.9,
     neovide_remember_window_size = true,
     neovide_cursor_vfx_mode = "torpedo",
     neovide_cursor_vfx_particle_lifetime = 4.2,
-    neovide_floating_opacity = 0.9,
+    neovide_floating_opacity = 0.7,
     neovide_no_idle = true,
     -- neovide_opacity = 0.8,
     neovide_cursor_vfx_particle_phase = 2.5,
@@ -67,41 +68,46 @@ local globals = {
     neovide_input_use_logo = true,
 }
 
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append("c")
 
-for i, v in pairs(Opts) do vim.opt[i] = v end
-for i, v in pairs(globals) do vim.g[i] = v end
-
-vim.highlight.on_yank {on_visual = true}
-
-if vim.g.transparrent == true then
-    vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
-    vim.cmd "au ColorScheme * hi BufferLineSeprator guibg='#222'"
+for i, v in pairs(Opts) do
+    vim.opt[i] = v
+end
+for i, v in pairs(globals) do
+    vim.g[i] = v
 end
 
-require('neoscroll').setup()
-require('conf')
+vim.highlight.on_yank({ on_visual = true })
+
+if vim.g.transparrent == true then
+    vim.cmd("au ColorScheme * hi Normal ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi SignColumn ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi NormalNC ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi MsgArea ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none")
+    vim.cmd("au ColorScheme * hi BufferLineSeprator guibg='#222'")
+end
+
+require("neoscroll").setup()
+require("conf")
 require("todo-comments").setup()
+require("nvim-tree").setup(vim.g.nvimTreeConfig.setup)
 
 -- Session manager
-local Path = require('plenary.path')
-require('session_manager').setup({
-    sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'),
-    path_replacer = '__',
-    colon_replacer = '++',
+local Path = require("plenary.path")
+require("session_manager").setup({
+    sessions_dir = Path:new(vim.fn.stdpath("data"), "sessions"),
+    path_replacer = "__",
+    colon_replacer = "++",
     autoload_mode = "Disabled",
     autosave_last_session = false,
-    autosave_ignore_not_normal = true
+    autosave_ignore_not_normal = true,
 })
 
 --- Cmd Configs
-vim.cmd[[colorscheme onedarker]]
+vim.cmd([[colorscheme onedarker]])
 
 -- Bdelete function to close buffer without exiting nvim or closing buffer window
 vim.cmd([[
@@ -179,4 +185,3 @@ vim.cmd([[
             \ :call s:bdelete("bwipeout", <q-bang>, <q-args>)
 
 ]])
-
