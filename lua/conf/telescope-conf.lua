@@ -3,7 +3,7 @@ local actions = require("telescope.actions")
 require("telescope").setup({
     defaults = {
         prompt_prefix = "  ",
-        selection_caret = "   ",
+        selection_caret = "📌",
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
@@ -49,6 +49,6 @@ require("telescope").setup({
     },
 })
 
-require("telescope").load_extension("sessions")
+-- require("telescope").load_extension("sessions")
 require("telescope").load_extension("projects")
 require("telescope").load_extension("media_files")

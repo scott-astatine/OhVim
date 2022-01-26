@@ -1,36 +1,67 @@
 local lualine = require("lualine")
 
-local bg = function()
-    if vim.g.transparrent then
-        return "#e0e11"
-    else
-        return "#2b2b2c"
-    end
-end
-
 local colors = {
-    bg = bg(),
-    fg = "#dfdfcf",
-    yellow = "#ECBE7B",
-    cyan = "#008080",
-    darkblue = "#081633",
-    green = "#98de65",
-    orange = "#FF8800",
     violet = "#a9a1e1",
     magenta = "#c678dd",
-    blue = "#51afef",
-    red = "#fb2c5d",
-    purple = "#be3dff",
+    yellow = "#e5c07b",
+    black = "#202020",
+    neon = "#DFFF00",
+    white = "#FFFFFF",
+    green = "#70fa30",
+    purple = "#5F005F",
+    blue = "#00DFFF",
+    darkblue = "#00003F",
+    navyblue = "#131330",
+    brightgreen = "#9CFFa3",
+    gray = "#29242a",
+    darkgray = "#2c2826",
+    lightgray = "#504945",
+    inactivegray = "#3c3f34",
+    orange = "#FFAF00",
+    red = "#f02c35",
+    brightorange = "#C08A20",
+    brightred = "#fa2631",
+    cyan = "#00DFFF",
+}
+
+local theme = {
+    normal = {
+        a = { bg = colors.neon, fg = colors.black, gui = "bold" },
+        b = { bg = colors.gray, fg = colors.white },
+        c = { bg = colors.black, fg = colors.brightgreen },
+    },
+    insert = {
+        a = { bg = colors.blue, fg = colors.darkblue, gui = "bold" },
+        b = { bg = colors.navyblue, fg = colors.white },
+        c = { bg = colors.darkblue, fg = colors.white },
+    },
+    visual = {
+        a = { bg = colors.orange, fg = colors.black, gui = "bold" },
+        b = { bg = colors.darkgray, fg = colors.white },
+        c = { bg = colors.darkgray, fg = colors.white },
+    },
+    replace = {
+        a = { bg = colors.brightred, fg = colors.white, gui = "bold" },
+        b = { bg = colors.cyan, fg = colors.darkblue },
+        c = { bg = colors.navyblue, fg = colors.white },
+    },
+    command = {
+        a = { bg = colors.green, fg = colors.black, gui = "bold" },
+        b = { bg = colors.darkgray, fg = colors.white },
+        c = { bg = colors.black, fg = colors.brightgreen },
+    },
+    inactive = {
+        a = { bg = colors.darkgray, fg = colors.gray, gui = "bold" },
+        b = { bg = colors.darkgray, fg = colors.gray },
+        c = { bg = colors.darkgray, fg = colors.gray },
+    },
 }
 
 -- Config
-local theme = require("lualine.themes.powerline_dark")
--- theme.normal.c.fg = '#c9efaf'
--- theme.normal.c.bg = colors.bg
 local config = {
     options = {
-        component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
         theme = theme,
     },
     sections = {
@@ -81,6 +112,7 @@ local function ins_left(component)
     table.insert(config.inactive_sections.lualine_c, component)
 end
 
+-- Inserts a component in lualine_c at right section
 local function ins_right(component)
     table.insert(config.sections.lualine_x, component)
     -- table.insert(config.inactive_sections.lualine_x, component)
@@ -112,7 +144,7 @@ local mode_color = {
 -- Left Side components
 ins_left({
     function()
-        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
+        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.gray)
         return "▊"
     end,
     color = "LualineMode",
@@ -121,7 +153,7 @@ ins_left({
 
 ins_left({
     function()
-        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
+        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.gray)
         return ""
     end,
     color = "LualineMode",
@@ -152,7 +184,7 @@ ins_left({
 ins_left({
     "diagnostics",
     sources = { "nvim_diagnostic" },
-    symbols = { error = " ", warn = " ", info = " ", hint = " " },
+    symbols = { error = " ", warn = " ", info = " ", hint = "💡" },
     diagnostics_color = {
         color_error = { fg = colors.red },
         color_warn = { fg = colors.yellow },
@@ -179,6 +211,7 @@ ins_right({
     cond = function()
         return conditions.hide_in_width() and conditions.not_nvtree()
     end,
+    icon = "📅",
     color = { fg = colors.fg, gui = "bold" },
 })
 
@@ -186,12 +219,13 @@ ins_right({
 
 ins_right({
     "diff",
-    symbols = { added = " ", modified = "🪄", removed = " " },
+    symbols = { added = " ", modified = "🪄", removed = "⛔" },
     diff_color = {
         added = { fg = colors.green },
-        modified = { fg = colors.purple },
+        modified = { fg = colors.magenta },
         removed = { fg = colors.red },
     },
+    padding = 1,
     cond = function()
         return conditions.check_git_workspace() and conditions.not_nvtree()
     end,
@@ -204,6 +238,7 @@ ins_right({
         return conditions.buffer_not_empty() and conditions.not_nvtree()
     end,
     color = { fg = colors.yellow },
+    padding = { right = 1 },
 })
 
 ins_right({
@@ -235,7 +270,7 @@ ins_right({
 
 ins_right({
     function()
-        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
+        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.gray)
         return "▊"
     end,
     color = "LualineMode",

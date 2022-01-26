@@ -1,5 +1,10 @@
 local shell = os.getenv("SHELL")
 
+_G.qBufnWin = function()
+    vim.cmd("Bdelete!")
+    vim.cmd("quit")
+end
+
 local function termConf(ops)
     local nWops = ops or false
     local winopts = {
@@ -20,7 +25,7 @@ local function termConf(ops)
     }
 
     local mappings = {
-        { key = "q", cb = "<cmd>bdelete!<cr>" },
+        { key = "q", cb = "<cmd>lua qBufnWin()<cr>" },
     }
 
     if nWops ~= true then

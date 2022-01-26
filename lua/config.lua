@@ -1,3 +1,5 @@
+require("keymaps")
+
 -- Vim settings
 local Opts = {
     number = true,
@@ -44,14 +46,13 @@ local Opts = {
     numberwidth = 4,
     signcolumn = "yes",
     completeopt = "menuone,noselect",
+    sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal",
 }
 
 local globals = {
-    transparrent = false,
+    transparrent = true,
     term_in_insert = true,
     always_show_bufferline = true,
-    onedark_style = "deep",
-    onedark_italic_comment = true,
     format_on_save = true,
 
     -- Neovide config
@@ -94,6 +95,7 @@ require("neoscroll").setup()
 require("conf")
 require("todo-comments").setup()
 require("nvim-tree").setup(vim.g.nvimTreeConfig.setup)
+require("onedark").load()
 
 -- Session manager
 local Path = require("plenary.path")
@@ -106,8 +108,6 @@ require("session_manager").setup({
     autosave_ignore_not_normal = true,
 })
 
---- Cmd Configs
-vim.cmd([[colorscheme onedarker]])
 
 -- Bdelete function to close buffer without exiting nvim or closing buffer window
 vim.cmd([[

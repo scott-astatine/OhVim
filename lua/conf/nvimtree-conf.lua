@@ -110,7 +110,7 @@ local nvimtreeconf = {
             staged = "S",
             unmerged = "",
             renamed = "➜",
-            deleted = "",
+            deleted = "⛔",
             untracked = "U",
             ignored = "◌",
         },
@@ -139,4 +139,4 @@ vim.g.nvim_tree_window_picker_exclude = {
         "Term",
     },
 }
-vim.cmd([[ highlight NvimTreeFolderIcon guifg=#0fac5e ]])
+vim.cmd([[ highlight NvimTreeFolderIcon guifg=#0facfe ]])

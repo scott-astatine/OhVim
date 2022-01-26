@@ -74,7 +74,6 @@ local buttons = {
         button("SPC f f", "  Find file"),
         button("SPC f r", "  Recently opened files"),
         button("SPC s l", "  Open last session"),
-        button("SPC s f", "  Open a saved session"),
         button("SPC f t", "  Find text"),
     },
     opts = {

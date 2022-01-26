@@ -25,8 +25,12 @@ keymap("n", "H", ":bp!<CR>", ops)
 keymap("v", "L", ":bn!<CR>", ops)
 keymap("v", "H", ":bp!<CR>", ops)
 
+-- End of the Line
 keymap("n", "E", "$", ops)
 keymap("v", "E", "$", ops)
+-- Match brackets
+keymap("n", "B", "%", ops)
+keymap("v", "B", "%", ops)
 
 -- Completion & Lsp
 keymap("i", "<expr><TAB>", 'pumvisible() ? "\\<C-n>" : \\"<TAB>"', ops)
@@ -81,7 +85,6 @@ local gmaps = {
 }
 
 _G.formatnSave = function()
-    vim.cmd(vim.g.fmtCmd)
     vim.cmd("write")
 end
 
@@ -90,8 +93,9 @@ local mappings = {
     ["q"] = { "<cmd>q<CR>", "Quit" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["x"] = { "<cmd>Bdelete<cr>", "Close Buffer" },
-    ["<SPC>"] = { "<ESC>", "ESC" },
+    [" "] = { "<ESC>", "ESC" },
     ["r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
+    ["k"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hint" },
 
     c = {
         name = "Config",
@@ -151,10 +155,10 @@ local mappings = {
     s = {
         name = "Session",
         n = { "<cmd>mksession<cr>", "New Session" },
-        l = { "<cmd>LoadLastSession<cr>", "Last Session" },
-        f = { "<cmd>Telescope sessions<cr>", "List Sessions" },
-        s = { "<cmd>SaveSession<cr>", "Save Session" },
-        d = { "<cmd>LoadCurrentDirSession<cr>", "CurrentDir Session" },
+        l = { "<cmd>SessionManager load_last_session<cr>", "Last Session" },
+        f = { "<cmd>SessionManager load_session<cr>", "List Sessions" },
+        s = { "<cmd>SessionManager save_current_session<cr>", "Save Session" },
+        d = { "<cmd>SessionManager load_current_dir_session<cr>", "CurrentDir Session" },
     },
 
     p = {

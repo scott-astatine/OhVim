@@ -39,7 +39,7 @@ require("bufferline").setup({
         offsets = {
             {
                 filetype = "NvimTree",
-                text = "Project",
+                text = "🏗 Explorer 🚀 ",
                 text_align = "center",
             },
         },
