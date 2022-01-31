@@ -39,8 +39,10 @@ require("bufferline").setup({
         offsets = {
             {
                 filetype = "NvimTree",
-                text = "🏗 Explorer 🚀 ",
+                text = "🧬 Ꜫ𝔁𝔭ﺎ𝝈𝒓𝒆𝒓   🚀",
                 text_align = "center",
+                padding = 1,
+                highlight = "Keyword"
             },
         },
         show_buffer_icons = true, -- disable filetype icons for buffers
@@ -48,7 +50,7 @@ require("bufferline").setup({
         show_close_icon = false,
         show_tab_indicators = true,
         persist_buffer_sort = true,
-        separator_style = "slant",
+        separator_style = "thick",
         enforce_regular_tabs = false,
         always_show_bufferline = vim.g.always_show_bufferline,
         sort_by = "id",

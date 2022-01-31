@@ -1,6 +1,6 @@
 require("onedark").setup({
     -- Main options --
-    style = "darker", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    style = "warmer", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
     transparent = vim.g.transparrent, -- Show/hide background
     term_colors = true, -- Change terminal color as per the selected theme style
     ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden

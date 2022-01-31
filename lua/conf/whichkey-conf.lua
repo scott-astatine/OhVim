@@ -18,7 +18,7 @@ M.config = {
             spelling = { enabled = true, suggestions = 20 },
         },
         icons = {
-            breadcrumb = "≻",
+            breadcrumb = "⇛≻",
             separator = "⇒ ",
             group = "∬ ",
         },

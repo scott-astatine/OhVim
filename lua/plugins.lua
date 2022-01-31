@@ -37,7 +37,6 @@ return require("packer").startup(function(use)
     -- Project manager
     use("ahmedkhalf/project.nvim")
     use({ "scott-astatine/Executer.nvim", as = "Executer" })
-
     -- Start screen
     use("goolord/alpha-nvim")
     use("BlakeJC94/alpha-nvim-fortune")
@@ -79,15 +78,6 @@ return require("packer").startup(function(use)
     use("akinsho/bufferline.nvim")
 
     -- Session Manager
-    -- use({
-    --     "rmagatti/auto-session",
-    --     config = function()
-    --         require("auto-session").setup({
-    --             log_level = "info",
-    --             auto_session_suppress_dirs = { "~/", "~/Projects" },
-    --         })
-    --     end,
-    -- })
     use("Shatur/neovim-session-manager")
 
     -- Icons
@@ -117,7 +107,6 @@ return require("packer").startup(function(use)
         },
     })
     --- End OhVim required plugins
-
 
     use("alaviss/nim.nvim")
     use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })

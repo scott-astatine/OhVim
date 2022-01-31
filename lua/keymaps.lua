@@ -63,12 +63,6 @@ t["zb"] = { "zb", { "250" } }
 
 require("neoscroll.config").set_mappings(t)
 
-local smap = {
-    t = { "<cmd>tabnew<cr>", "New Tab" },
-    v = { "<cmd>vsplit<cr>", "Vertical Split" },
-    h = { "<cmd>split<cr>", "Horizontal Split" },
-}
-
 local tmap = {
     h = { "<cmd>lua splitTerm(2)<cr>", "Horizontally Split Terminal" },
     v = { "<cmd>lua splitTerm(1)<cr>", "Vertically Split Terminal" },
@@ -91,7 +85,8 @@ end
 local mappings = {
     ["e"] = { "<cmd>NvimTreeFocus<CR>", "Explorer" },
     ["q"] = { "<cmd>q<CR>", "Quit" },
-    ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+    ["n"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+    ["h"] = { "<cmd>Telescope help_tags<CR>", "Neovim Docs" },
     ["x"] = { "<cmd>Bdelete<cr>", "Close Buffer" },
     [" "] = { "<ESC>", "ESC" },
     ["r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Refactor" },
@@ -121,17 +116,15 @@ local mappings = {
         name = "Window",
         q = { "<cmd>qall<CR>", "Quit Nvim" },
         c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-        t = { "<cmd>tabnew<cr>", "New Tab" },
-        l = { "<C-w>l", "Left" },
-        h = { "<C-w>h", "Right" },
-        j = { "<C-w>j", "Up" },
-        k = { "<C-w>k", "Down" },
         i = { "<C-w>>", "Increase width" },
         d = { "<C-w><", "Decrease breadth" },
         e = { "<C-w>=", "Equal height & width" },
         f = { "<C-w>|", "Max out current win" },
         x = { "<C-w>x", "Swap current with next" },
         w = { "<C-w>w", "Switch Window" },
+        t = { "<cmd>tabnew<cr>", "New Tab" },
+        v = { "<cmd>vsplit<cr>", "Vertical Split" },
+        h = { "<cmd>split<cr>", "Horizontal Split" },
         T = { "<C-w>T", "Break out into Tab " },
         P = {
             "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
@@ -216,9 +209,6 @@ wk.setup(wkc.config.setup)
 -- Leader keymaps
 wk.register(mappings, wkc.config.opts)
 wk.register(vmappings, wkc.config.vopts)
--- `s` keymaps
-wk.register(smap, { mode = "n", prefix = "s", silent = true })
-wk.register(smap, { mode = "v", prefix = "s", silent = true })
 
 -- Terminal keymaps
 wk.register(tmap, { mode = "n", prefix = "t", silent = true })

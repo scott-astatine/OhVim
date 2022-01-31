@@ -14,5 +14,5 @@ if exists(':GuiScrollBar')
 endif
 
 if exists(':GuiLineSpace')
-    GuiLineSpace -0.4
+    GuiLineSpace -0.2
 endif

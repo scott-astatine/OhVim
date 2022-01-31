@@ -238,7 +238,7 @@ ins_right({
         return conditions.buffer_not_empty() and conditions.not_nvtree()
     end,
     color = { fg = colors.yellow },
-    padding = { right = 1 },
+    padding = 1,
 })
 
 ins_right({

@@ -1,8 +1,7 @@
 -- NvimTree Config
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 local mapL = {
-    { key = { "<CR>", "o", "<2-LeftMouse>" }, cb = tree_cb("edit") },
-    { key = "l", cb = tree_cb("edit") },
+    { key = { "<CR>", "o", "<2-LeftMouse>", "l" }, cb = tree_cb("edit") },
     { key = "m", cb = tree_cb("cd") },
     { key = "v", cb = tree_cb("vsplit") },
     { key = "h", cb = tree_cb("split") },
@@ -32,7 +31,7 @@ local mapL = {
     { key = "]c", cb = tree_cb("next_git_item") },
     { key = "-", cb = tree_cb("dir_up") },
     { key = "q", cb = tree_cb("close") },
-    { key = "g?", cb = tree_cb("toggle_help") },
+    { key = "?", cb = tree_cb("toggle_help") },
 }
 
 local nvimtreeconf = {
@@ -52,7 +51,7 @@ local nvimtreeconf = {
         diagnostics = {
             enable = true,
             icons = {
-                hint = "",
+                hint = "💡",
                 info = "",
                 warning = "",
                 error = "",
@@ -115,8 +114,8 @@ local nvimtreeconf = {
             ignored = "◌",
         },
         folder = {
-            default = "",
-            open = "",
+            default = "📁",
+            open = "📂",
             empty = "",
             empty_open = "",
             symlink = "",
@@ -139,4 +138,3 @@ vim.g.nvim_tree_window_picker_exclude = {
         "Term",
     },
 }
-vim.cmd([[ highlight NvimTreeFolderIcon guifg=#0facfe ]])

@@ -21,8 +21,8 @@ lsp_installer.on_server_ready(function(server)
     }
 
     if server.name == "sumneko_lua" then
-        local lualspConf = require("lsp.settings.sumneko_lua")
-        opts = vim.tbl_deep_extend("force", lualspConf, opts)
+        local luaLspConf = require("lsp.settings.sumneko_lua")
+        opts = vim.tbl_deep_extend("force", luaLspConf, opts)
     end
 
     server:setup(opts)
@@ -36,7 +36,12 @@ vim.diagnostic.config({
     severity_sort = false,
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = {
+    Error = " ",
+    Warn = " ",
+    Hint = "💡",
+    Info = " ",
+}
 
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
