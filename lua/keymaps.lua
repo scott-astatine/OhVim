@@ -1,12 +1,10 @@
 -- WhichKey keymaps
-local wkc = require("conf.whichkey-conf")
+local wkc = require("plugins.config.whichkey-conf")
 local wk = require("which-key")
 
 -- Explicit keymaps
 --
 local keymap = vim.api.nvim_set_keymap
-vim.g.mapleader = " "
-
 local ops = { noremap = true, silent = true }
 
 --- Window Navigation
@@ -24,6 +22,7 @@ keymap("n", "L", ":bn!<CR>", ops)
 keymap("n", "H", ":bp!<CR>", ops)
 keymap("v", "L", ":bn!<CR>", ops)
 keymap("v", "H", ":bp!<CR>", ops)
+keymap("n", ";", ":", ops)
 
 -- End of the Line
 keymap("n", "E", "$", ops)
@@ -78,10 +77,6 @@ local gmaps = {
     i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "GoTo Implementation" },
 }
 
-_G.formatnSave = function()
-    vim.cmd("write")
-end
-
 local mappings = {
     ["e"] = { "<cmd>NvimTreeFocus<CR>", "Explorer" },
     ["q"] = { "<cmd>q<CR>", "Quit" },
@@ -94,7 +89,7 @@ local mappings = {
 
     c = {
         name = "Config",
-        r = { "<cmd>so %" .. vim.fn.stdpath("config") .. "/init.lua" .. "<cr>", "Reload config" },
+        r = { "<cmd>so ~/.config/nvim/init.lua<cr>", "Reload config" },
         o = { "<cmd>e " .. vim.fn.stdpath("config") .. "/init.lua" .. "<cr>", "Opens config" },
     },
     f = {

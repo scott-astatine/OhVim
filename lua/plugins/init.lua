@@ -1,3 +1,5 @@
+vim.cmd [[packadd packer.nvim]]
+
 require("packer").init({
     log = { level = "warn" },
     git = { clone_timeout = 1000 },
@@ -8,6 +10,7 @@ require("packer").init({
     },
 })
 
+
 return require("packer").startup(function(use)
     --- Start OhVim required plugins
     --
@@ -15,16 +18,31 @@ return require("packer").startup(function(use)
     use({ "wbthomason/packer.nvim", opt = true })
     use("karb94/neoscroll.nvim")
 
+
     -- WhichKey
     use("folke/which-key.nvim")
 
+
+
     -- Colorscheme
     use({ "dracula/vim", as = "dracula" })
-    use("navarasu/onedark.nvim")
-    use("norcalli/nvim-colorizer.lua")
-    use("real-99/onedarker.nvim")
+    use("folke/tokyonight.nvim")
+    use("https://gitlab.com/__tpb/monokai-pro.nvim")
+    use({ "navarasu/onedark.nvim",
+        config = function()
+        end
+    })
 
-    use("moll/vim-bbye")
+    use({ "NvChad/base46",
+        config = function()
+            local ok, base46 = pcall(require, "base46")
+            if ok then
+                base46.load_theme()
+            end
+        end,
+    })
+
+    use("norcalli/nvim-colorizer.lua")
 
     -- Kommentary & Autopairs
     use("numToStr/Comment.nvim")
@@ -34,15 +52,14 @@ return require("packer").startup(function(use)
 
     use({ "edluffy/hologram.nvim" })
 
+
+
     -- Project manager
     use("ahmedkhalf/project.nvim")
     use({ "scott-astatine/Executer.nvim", as = "Executer" })
     -- Start screen
     use("goolord/alpha-nvim")
     use("BlakeJC94/alpha-nvim-fortune")
-
-    -- Neorg
-    use({ "nvim-neorg/neorg", requires = "nvim-lua/plenary.nvim" })
 
     -- treesitter
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -51,9 +68,13 @@ return require("packer").startup(function(use)
     use("andweeb/presence.nvim")
     use("lukas-reineke/indent-blankline.nvim")
 
+
+
     -- Todo comment
     use({ "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" })
     use({ "VonHeikemen/searchbox.nvim", requires = { { "MunifTanjim/nui.nvim" } } })
+
+
 
     -- Telescope
     use("nvim-lua/popup.nvim")
@@ -61,6 +82,8 @@ return require("packer").startup(function(use)
     use("nvim-telescope/telescope.nvim")
     use("nvim-telescope/telescope-media-files.nvim")
     use("rcarriga/nvim-notify")
+
+
     use({
         "nvim-telescope/telescope-frecency.nvim",
         config = function()
@@ -71,14 +94,23 @@ return require("packer").startup(function(use)
 
     -- Git
     use("lewis6991/gitsigns.nvim")
+
+
     use("TimUntersberger/neogit")
 
     -- StatusLine
-    use("nvim-lualine/lualine.nvim")
+    use({ "nvim-lualine/lualine.nvim",
+        config = function()
+            require("ui.statusline")
+        end
+    })
     use("akinsho/bufferline.nvim")
 
     -- Session Manager
-    use("Shatur/neovim-session-manager")
+    use({ "Shatur/neovim-session-manager",
+        config = function()
+        end
+    })
 
     -- Icons
     use("kyazdani42/nvim-web-devicons")
@@ -93,6 +125,7 @@ return require("packer").startup(function(use)
     use("tjdevries/manillua.nvim")
     use("neovim/nvim-lspconfig")
     use("ckipp01/stylua-nvim")
+
     -- Completion
     use("L3MON4D3/LuaSnip")
     use("nvim-lua/completion-nvim")

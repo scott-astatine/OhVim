@@ -1,49 +1,62 @@
-local lsp_installer = require("nvim-lsp-installer")
+local present, lspconfig = pcall(require, "lspconfig")
 
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-        on_attach = function(client, buf)
-            vim.cmd([[command! Format execute 'lua vim.lsp.buf.formatting()']])
+if not present then
+    return
+end
+local M = {}
 
-            if client.name == "sumneko_lua" then
-                vim.api.nvim_buf_set_keymap(
-                    buf,
-                    "n",
-                    "<leader>lf",
-                    '<cmd>lua require("stylua-nvim").format_file()<CR>',
-                    { noremap = true }
-                )
-                vim.g.fmtCmd = 'lua require("stylua-nvim").format_file()'
-            else
-                vim.g.fmtCmd = "lua vim.lsp.buf.formatting()"
-            end
-        end,
-    }
+require "ui.lsp"
 
-    if server.name == "sumneko_lua" then
-        local luaLspConf = require("lsp.settings.sumneko_lua")
-        opts = vim.tbl_deep_extend("force", luaLspConf, opts)
-    end
+M.on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.document_range_formatting = true
+end
 
-    server:setup(opts)
-end)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false,
-})
-
-local signs = {
-    Error = " ",
-    Warn = " ",
-    Hint = "💡",
-    Info = " ",
+capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { "markdown", "plaintext" },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+        properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+        },
+    },
 }
 
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+lspconfig.rust_analyzer.setup {
+    cmd = { "rust-analyzer" }
+}
+lspconfig.clangd.setup {
+    cmd = { "clangd" }
+}
+lspconfig.pylsp.setup {}
+
+lspconfig.sumneko_lua.setup {
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = {
+                    [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                    [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+                },
+                maxPreload = 100000,
+                preloadFileSize = 10000,
+            },
+        },
+    },
+}
