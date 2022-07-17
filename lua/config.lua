@@ -1,6 +1,6 @@
 -- Plugin Inits
-require "keymaps"
-require "options"
+require("keymaps")
+require("options")
 require("neoscroll").setup()
 require("plugins.config")
 require("todo-comments").setup()
@@ -25,7 +25,7 @@ autocmd("BufUnload", {
     end,
 })
 
--- Don't auto commenting new lines
+-- Don"t auto commenting new lines
 autocmd("BufEnter", {
     pattern = "*",
     command = "set fo-=c fo-=r fo-=o",

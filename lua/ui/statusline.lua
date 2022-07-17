@@ -42,16 +42,16 @@ local colors = {
     orange = "#FFAF00",
     red = "#f02c35",
     brightorange = "#C08A20",
-    light_green = '#83a598',
+    light_green = "#83a598",
     brightred = "#fa2631",
-    cyan = "#00DFFF",
+    cyan = "#00dcc0",
 }
 
 
-local empty = require('lualine.component'):extend()
+local empty = require("lualine.component"):extend()
 function empty:draw(default_highlight)
-    self.status = ''
-    self.applied_separator = ''
+    self.status = ""
+    self.applied_separator = ""
     self:apply_highlights(default_highlight)
     self:apply_section_separators()
     return self.status
@@ -60,12 +60,12 @@ end
 -- Put proper separators and gaps between components in sections
 local function process_sections(sections)
     for name, section in pairs(sections) do
-        local left = name:sub(9, 10) < 'x'
-        for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
+        local left = name:sub(9, 10) < "x"
+        for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
             table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white2 } })
         end
         for id, comp in ipairs(section) do
-            if type(comp) ~= 'table' then
+            if type(comp) ~= "table" then
                 comp = { comp }
                 section[id] = comp
             end
@@ -77,14 +77,14 @@ end
 
 local function search_result()
     if vim.v.hlsearch == 0 then
-        return ''
+        return ""
     end
-    local last_search = vim.fn.getreg('/')
-    if not last_search or last_search == '' then
-        return ''
+    local last_search = vim.fn.getreg("/")
+    if not last_search or last_search == "" then
+        return ""
     end
     local searchcount = vim.fn.searchcount { maxcount = 9999 }
-    return last_search .. '(' .. searchcount.current .. '/' .. searchcount.total .. ')'
+    return last_search .. "(" .. searchcount.current .. "/" .. searchcount.total .. ")"
 end
 
 local function ignoreBufs()
@@ -93,23 +93,31 @@ local function ignoreBufs()
         return false
     elseif buff.filetype:match("Telescope") then
         return false
+    elseif buff.filetype:match("Term") then
+        return false
     elseif buff.filetype:match("No Name") then
         return false
     else return true
     end
 end
 
-require('lualine').setup {
+require("lualine").setup {
     options = {
-        theme = "horizon",
-        component_separators = '',
+        theme = "onedark",
+        component_separators = "",
         section_separators = { left = sepS.default.left, right = sepS.default.right },
     },
     sections = process_sections {
+        --- Mode
         lualine_a = {
-            'mode'
+            {
+                "mode",
+                section_separators = { left = sepS.round.left }
+            }
         },
+        --- Lsp diagnostics and filename
         lualine_b = {
+
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
@@ -129,33 +137,33 @@ require('lualine').setup {
                 symbols = { modified = " ● ", readonly = "  " },
                 icon = "",
                 icons_enabled = true,
-                color = { fg = "#ff5dc6", gui = "bold" },
+                color = { fg = colors.cyan, gui = "bold" },
                 cond = ignoreBufs
             },
 
             {
-                '%w',
+                "%w",
                 cond = function()
                     return vim.wo.previewwindow
                 end,
             },
 
             {
-                '%r',
+                "%r",
                 cond = function()
                     return vim.bo.readonly
                 end,
             },
 
             {
-                '%q',
+                "%q",
                 cond = function()
-                    return vim.bo.buftype == 'quickfix'
+                    return vim.bo.buftype == "quickfix"
                 end,
             },
         },
-        lualine_c = {
 
+        lualine_c = {
             {
                 function()
                     local Lsp = vim.lsp.util.get_progress_messages()[1]
@@ -168,15 +176,9 @@ require('lualine').setup {
                     local frame = math.floor(ms / 120) % #spinners
                     local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
 
-                    return ("%#St_LspProgress#" .. content) or ""
-                end
-                ,
-                cond = function()
-                    local Lsp = vim.lsp.util.get_progress_messages()[1]
-                    return vim.o.columns < 120 or not Lsp
-                end
-            }
-
+                    return (content) or ""
+                end,
+            },
         },
         lualine_x = {
             {
@@ -192,11 +194,11 @@ require('lualine').setup {
                 end
             },
             {
-                '%l:%c',
-                color = { fg = colors.brightred }
+                "%l:%c",
+                color = { fg = colors.magenta }
             },
             {
-                '%p%%/%L',
+                "%p%%/%L",
                 color = { fg = colors.brightorange },
                 icon = ""
             },
@@ -245,7 +247,7 @@ require('lualine').setup {
         },
     },
     inactive_sections = {
-        lualine_c = { '%f %y %m' },
+        lualine_c = { "%f %y %m" },
         lualine_x = {},
     },
 }

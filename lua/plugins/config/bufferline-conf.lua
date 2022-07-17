@@ -39,10 +39,10 @@ require("bufferline").setup({
         offsets = {
             {
                 filetype = "NvimTree",
-                text = "🧬 Ꜫ𝔁𝔭ﺎ𝝈𝒓𝒆𝒓   🚀",
+                text = "🧬 " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " 🚀",
                 text_align = "center",
                 padding = 1,
-                highlight = "Keyword"
+                highlight = "Boolean"
             },
         },
         show_buffer_icons = true, -- disable filetype icons for buffers

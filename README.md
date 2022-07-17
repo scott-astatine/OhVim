@@ -1,14 +1,10 @@
 # Oh!Vim
+This is a simple Neovim config with my favourite keybindings
 
 ### Install and configure Noto Sans Emoji font and JetBrains Mono with your terminal
 
-## Install this config
-```bash
-curl https://raw.githubusercontent.com/scott-astatine/OhVim/dev/install.sh | sh
 
-```
-
-## or install with git
+## Install
 ```bash
 # Backup your `~/.config/nvim/` dir
 rm ~/.config/nvim -rf

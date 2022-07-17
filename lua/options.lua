@@ -74,11 +74,11 @@ M.opt = {
 
 M.g = {
     mapleader = " ",
-    transparrent = false,
+    transparrent = true,
     term_in_insert = true,
     always_show_bufferline = true,
     format_on_save = true,
-    colorscheme = "tokyonight",
+    colorscheme = "monokaipro",
 
     -- Neovide config
     neovide_transparency = 0.9,

@@ -33,15 +33,6 @@ return require("packer").startup(function(use)
         end
     })
 
-    use({ "NvChad/base46",
-        config = function()
-            local ok, base46 = pcall(require, "base46")
-            if ok then
-                base46.load_theme()
-            end
-        end,
-    })
-
     use("norcalli/nvim-colorizer.lua")
 
     -- Kommentary & Autopairs
